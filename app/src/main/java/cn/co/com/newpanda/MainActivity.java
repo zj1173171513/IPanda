@@ -12,6 +12,9 @@ import butterknife.ButterKnife;
 import cn.co.com.newpanda.base.BaseActivity;
 import cn.co.com.newpanda.view.activity.TwoActivity;
 
+/**
+ * 张泽彪修改
+ */
 
 public class MainActivity extends BaseActivity {
 
