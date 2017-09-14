@@ -15,7 +15,7 @@ import cn.co.com.newpanda.view.activity.TwoActivity;
 
 public class MainActivity extends BaseActivity {
 
-    //上传
+    //上传啊速度
     @BindView(R.id.mainImg)
     ImageView mainImg;
 
