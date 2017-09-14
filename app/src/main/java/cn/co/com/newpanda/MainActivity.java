@@ -16,10 +16,15 @@ import cn.co.com.newpanda.view.activity.TwoActivity;
  * 张泽彪修改
  * 二次哦
  */
+
 /**
  * 张晓阳修改
  * 一次哦
  */
+/*
+* 李翰
+* 无数次了
+* */
 
 public class MainActivity extends BaseActivity {
 
@@ -79,7 +84,6 @@ public class MainActivity extends BaseActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
-
 
 
 }
