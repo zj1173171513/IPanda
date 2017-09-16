@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#80175ce7"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@mipmap/com_facebook_tooltip_black_xout"
+        android:id="@+id/liveChina_img"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/pup_bianji"
+        android:layout_alignEnd="@+id/pup_bianji" />
+    <TextView
+        android:text="切换栏目"
+        android:textSize="17dp"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/liveChina_img"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/pup_text" />
+
+    <TextView
+        android:text="编辑"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:background="#fff"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/pup_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:id="@+id/pup_bianji" />
+
+    <cn.co.com.newpanda.module.liveChina.LiVeChinaGridLayout
+        android:layout_below="@+id/pup_text"
+        android:layout_width="match_parent"
+        android:id="@+id/grid_q"
+        android:layout_height="wrap_content"></cn.co.com.newpanda.module.liveChina.LiVeChinaGridLayout>
+
+    <TextView
+        android:text="点击添加更多栏目"
+        android:textSize="17dp"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grid_q"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="35dp"
+        android:id="@+id/pup_text2" />
+
+    <cn.co.com.newpanda.module.liveChina.LiVeChinaGridLayout
+        android:id="@+id/grid_t"
+        android:layout_below="@+id/pup_text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></cn.co.com.newpanda.module.liveChina.LiVeChinaGridLayout>
+</RelativeLayout>

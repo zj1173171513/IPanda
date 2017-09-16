@@ -8,4 +8,5 @@ package cn.co.com.newpanda.module.liveChina;
  */
 
 public class LiveChinaPresnter {
+
 }

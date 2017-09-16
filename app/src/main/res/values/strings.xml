@@ -4,4 +4,9 @@
     <string name="gungun">滚滚视频</string>
     <string name="bobao">熊猫播报</string>
     <string name="zhongguo">直播中国</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
+
