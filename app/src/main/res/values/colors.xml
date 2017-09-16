@@ -9,4 +9,5 @@
     <color name="color_bg_normal">#e7e7e8</color>
     <color name="color_text_selected">#ffffff</color>
     <color name="color_text_normal">#000000</color>
+    <color name="color_text_Red">#ea0707</color>
 </resources>

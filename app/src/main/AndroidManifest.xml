@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.co.com.newpanda">
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.process_outgoing_calls" />
@@ -13,6 +14,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -21,6 +23,7 @@
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <permission android:name="org.loader.litepalayer.playpermission" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -35,7 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.TwoActivity"/>
+        <activity android:name=".view.activity.TwoActivity" />
+        <activity
+            android:name=".view.activity.BillowingVideoActicity.ShiPinActivity"
+            android:configChanges="orientation"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
