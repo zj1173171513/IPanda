@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="熊猫直播"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#cccccc"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/pandaLiveTly"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/color_text_selected"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorPrimaryDark"
+        >
+
+    </android.support.design.widget.TabLayout>
+
+    <cn.co.com.newpanda.view.pager.NoScrollViewPager
+        android:id="@+id/pandaLiveVip"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </cn.co.com.newpanda.view.pager.NoScrollViewPager>
 </LinearLayout>

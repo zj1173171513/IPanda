@@ -53,8 +53,8 @@ public abstract class BaseFragment extends Fragment {
     protected void onHidden(){}
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         unbinder.unbind();
     }
 
