@@ -17,9 +17,24 @@ import cn.co.com.newpanda.view.activity.TwoActivity;
  * 二次哦
  */
 
+/**
+ * 张晓阳修改
+ * 一次哦
+ */
+
+/*
+* 李翰我欣赏
+* 无数次了
+* */
+
+    /*
+    *
+    *
+    *
+    * */
 public class MainActivity extends BaseActivity {
 
-
+    //上传啊速度刷到死
     @BindView(R.id.mainImg)
     ImageView mainImg;
 
@@ -75,7 +90,6 @@ public class MainActivity extends BaseActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
-
 
 
 }
