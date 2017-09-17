@@ -19,7 +19,8 @@ public class Urls {
     public static final String PANDAHOME_GUNGUNSHIPING = BASEURL + "shipinliebieye/video/index.json";
 
     //熊猫直播
-    public static final String PANDALIVE = BASEURL + "PAGE14501769230331752/index.json";
+    public static final String PANDALIVE = BASEURL+"PAGE14501769230331752/index.json";
+    public static final String HOME_UTL = BASEURL+"/PAGE14501749764071042/index.json";
 
     //首页互动
     public static final String HOMEHUDONG = BASEURL + "PAGE14501767715521482/index.json";

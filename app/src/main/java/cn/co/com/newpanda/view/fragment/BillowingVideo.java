@@ -11,11 +11,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.co.com.newpanda.adapter.MyAdapter;
 import cn.co.com.newpanda.R;
+import cn.co.com.newpanda.adapter.MyAdapter;
 import cn.co.com.newpanda.base.BaseFragment;
 import cn.co.com.newpanda.model.entity.BillowingVideoBean.BillowingVideolistBean;
-import cn.co.com.newpanda.model.entity.PandaLiveBean;
+import cn.co.com.newpanda.model.entity.homeBean.HomeBean;
 import cn.co.com.newpanda.module.home.HomeContract;
 import cn.co.com.newpanda.net.OkHttpUtils;
 import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
@@ -99,9 +99,10 @@ public class BillowingVideo extends BaseFragment implements HomeContract.View {
     }
 
     @Override
-    public void setResult(PandaLiveBean pandaLiveBean) {
+    public void setResult(HomeBean homeBean) {
 
     }
+
 
     @Override
     public void showMessage(String msg) {

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:background="#ffffff">
+    <TextView
+        android:textColor="#7696C2"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:id="@+id/three_item_title"
+        android:layout_marginLeft="5dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#f4f4f4"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:id="@+id/three_one_img"
+            />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="新生"
+                    android:textColor="#f90587"
+                    android:background="#ffffff"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/three_one_title"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="趣闻"
+                    android:textColor="#f90587"
+                    android:background="#ffffff"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/three_two_title"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#f4f4f4"
+        />
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/three_two_img"-->
+            <!--android:layout_width="170dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_margin="10dp" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/three_four_title"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@+id/three_two_img"-->
+            <!--android:layout_toRightOf="@+id/three_two_img"-->
+            <!--android:layout_marginTop="14dp"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/three_four_time"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@id/three_two_img"-->
+            <!--android:layout_toRightOf="@id/three_two_img"/>-->
+    <!--</RelativeLayout>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="#f4f4f4"/>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/three_three_img"-->
+            <!--android:layout_width="170dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_margin="10dp" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/three_five_title"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@+id/three_three_img"-->
+            <!--android:layout_toRightOf="@+id/three_three_img"-->
+            <!--android:layout_marginTop="14dp" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/three_five_time"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@id/three_three_img"-->
+            <!--android:layout_toRightOf="@id/three_three_img"/>-->
+    <!--</RelativeLayout>-->
+
+</LinearLayout>

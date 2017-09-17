@@ -1,6 +1,7 @@
 package cn.co.com.newpanda.view.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import cn.co.com.newpanda.app.App;
 import cn.co.com.newpanda.base.BaseActivity;
 import cn.co.com.newpanda.module.home.HomeFragment;
 import cn.co.com.newpanda.module.home.HomePresenter;
+import cn.co.com.newpanda.module.home.homeactivity.InteractionActivity;
 import cn.co.com.newpanda.view.fragment.BillowingVideo;
 import cn.co.com.newpanda.view.fragment.LiveChina;
 import cn.co.com.newpanda.view.fragment.PandaBroadcast;
@@ -317,6 +319,7 @@ public class TwoActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.twoHD:
+                startActivity(new Intent(TwoActivity.this,InteractionActivity.class));
                 break;
             case R.id.twoLonge:
                 break;
