@@ -1,6 +1,8 @@
 package cn.co.com.newpanda.view.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -20,11 +22,16 @@ import butterknife.Unbinder;
 import cn.co.com.newpanda.R;
 import cn.co.com.newpanda.adapter.LiveChinaStatePagerAdapter;
 import cn.co.com.newpanda.base.BaseFragment;
-import cn.co.com.newpanda.model.entity.LiVeChinaBean;
+import cn.co.com.newpanda.model.entity.livechinaBean.LiVeChinaBean;
+import cn.co.com.newpanda.model.entity.livechinaBean.ShuLiveChina;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.DaoMaster;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.DaoSession;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.ShuLiveChinaDao;
 import cn.co.com.newpanda.module.liveChina.LiveChinaPapupWindow;
 import cn.co.com.newpanda.net.OkHttpUtils;
 import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
 
+import static cn.co.com.newpanda.app.App.context;
 import static cn.co.com.newpanda.config.Urls.LIVECHINA;
 
 
@@ -48,6 +55,21 @@ public class LiveChina extends BaseFragment {
     private List<LiVeChinaBean.AlllistBean> listalllistBeen = new ArrayList<>();
     private List<LiVeChinaBean.TablistBean> listtablistBeen = new ArrayList<>();
     private List<Fragment> listfrag = new ArrayList<>();
+    private ShuLiveChinaDao shuLiveChinaDao;
+    private List<ShuLiveChina> listdao = new ArrayList<>();
+    private LiveChinaStatePagerAdapter liveChinaStatePagerAdapter;
+    private Handler handler= new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    liveChinaStatePagerAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
+    private ShuLiveChinaDao shuLiveChinaDao2;
 
     @Override
     protected int getLayoutId() {
@@ -61,7 +83,7 @@ public class LiveChina extends BaseFragment {
 
     @Override
     protected void loadData() {
-
+        initDao();
         //请求
         OkHttpUtils.getInstance().get(LIVECHINA, null, new MyNetWorkCallback<LiVeChinaBean>() {
 
@@ -69,33 +91,46 @@ public class LiveChina extends BaseFragment {
             public void onSuccess(LiVeChinaBean liVeChinaBean) {
                 listalllistBeen.addAll(liVeChinaBean.getAlllist());
                 listtablistBeen.addAll(liVeChinaBean.getTablist());
-
-
-                for (int i = 0; i < listalllistBeen.size(); i++) {
+                List<ShuLiveChina> listShu1 = shuLiveChinaDao.queryBuilder().list();
+                if (listShu1.size()==0){
+                    for (int i = 0; i < listtablistBeen.size(); i++) {
+                        String title = listtablistBeen.get(i).getTitle();
+                        ShuLiveChina shuLiveChina = new ShuLiveChina();
+                        shuLiveChina.setTitle(title);
+                        shuLiveChinaDao.insert(shuLiveChina);
+                    }
+                }
+                List<ShuLiveChina> listShus1 = shuLiveChinaDao.queryBuilder().list();
+                listdao.addAll(listShus1);
+                for (int i = 0; i < listdao.size(); i++) {
                     listfrag.add(new ZiLiveChinaFragment());
                 }
-                LiveChinaStatePagerAdapter liveChinaStatePagerAdapter = new LiveChinaStatePagerAdapter(getActivity()
-                        .getSupportFragmentManager(),listfrag,listtablistBeen);
+                liveChinaStatePagerAdapter = new LiveChinaStatePagerAdapter(getActivity()
+                        .getSupportFragmentManager(),listfrag,listdao);
                 tabChina.setupWithViewPager(pagerChina);
                 pagerChina.setAdapter(liveChinaStatePagerAdapter);
-            }
+                List<ShuLiveChina> listShu2 = shuLiveChinaDao2.queryBuilder().list();
+                if (listShu2.size()==0){
+                    for (int i = 0; i < listalllistBeen.size(); i++) {
+                        String title = listalllistBeen.get(i).getTitle();
+                        String url = listalllistBeen.get(i).getUrl();
+                        ShuLiveChina shuLiveChina = new ShuLiveChina();
+                        shuLiveChina.setTitle(title);
+                        shuLiveChinaDao2.insert(shuLiveChina);
+                    }
+                }
 
+            }
             @Override
             public void onError(int errorCode, String errorMsg) {
 
             }
         });
 
-
-
-
-
-
-
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                liveChinaPapupWindow = new LiveChinaPapupWindow(getActivity(),listalllistBeen,listtablistBeen);
+                liveChinaPapupWindow = new LiveChinaPapupWindow(getActivity());
                 liveChinaPapupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
@@ -103,18 +138,31 @@ public class LiveChina extends BaseFragment {
                         setBackgroundAlpha();
                     }
                 });
-
                 //点击时弹出PopupWindow，屏幕变暗
                 liveChinaPapupWindow.setAnimationStyle(R.style.dialogWindowAnim);
                 View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.livechina_fragment, null);
                 liveChinaPapupWindow.showAsDropDown(inflate);
-
+                handler.sendEmptyMessage(0);
             }
         });
 
 
 
+
     }
+
+    private void initDao() {
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context,"livechina.db");
+        DaoMaster daoMaster = new DaoMaster(devOpenHelper.getReadableDb());
+        DaoSession daoSession = daoMaster.newSession();
+        shuLiveChinaDao = daoSession.getShuLiveChinaDao();
+
+        DaoMaster.DevOpenHelper devOpenHelper2 = new DaoMaster.DevOpenHelper(context,"livechina2.db");
+        DaoMaster daoMaster2 = new DaoMaster(devOpenHelper2.getReadableDb());
+        DaoSession daoSession2 = daoMaster2.newSession();
+        shuLiveChinaDao2 = daoSession2.getShuLiveChinaDao();
+    }
+
     public void setBackgroundAlpha() {
         WindowManager.LayoutParams lp=getActivity().getWindow().getAttributes();
         lp.alpha=1.0f;

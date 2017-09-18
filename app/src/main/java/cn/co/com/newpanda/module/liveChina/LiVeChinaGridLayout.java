@@ -24,6 +24,7 @@ public class LiVeChinaGridLayout extends GridLayout{
     private Rect[] rects;
     private View dragView;
     private OnItemClickListener itemClickListener;
+    private Rect rect;
 
     public LiVeChinaGridLayout(Context context) {
         this(context, null);
@@ -153,7 +154,7 @@ public class LiVeChinaGridLayout extends GridLayout{
 
     private int getTouchIndex(DragEvent dragEvent) {
         for (int i = 0; i < rects.length; i++) {
-            Rect rect = rects[i];
+            Rect rect =  rects[i];
             if (rect.contains((int) dragEvent.getX(), (int) dragEvent.getY())) {
                 return i;
             }

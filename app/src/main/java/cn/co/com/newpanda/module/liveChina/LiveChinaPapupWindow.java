@@ -13,7 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.co.com.newpanda.R;
-import cn.co.com.newpanda.model.entity.LiVeChinaBean;
+import cn.co.com.newpanda.model.entity.livechinaBean.ShuLiveChina;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.DaoMaster;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.DaoSession;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.ShuLiveChinaDao;
+
+import static cn.co.com.newpanda.app.App.context;
 
 
 /**
@@ -30,14 +35,12 @@ public class LiveChinaPapupWindow extends PopupWindow {
     private final TextView pupBianji;
     private final LiVeChinaGridLayout gridQ;
     private final LiVeChinaGridLayout gridT;
-    private List<LiVeChinaBean.AlllistBean> listalllistBeen;
-    private List<LiVeChinaBean.TablistBean> listtablistBeen;
     private  int BIANJI = 1;
+    private ShuLiveChinaDao shuLiveChinaDao;
+    private ShuLiveChinaDao shuLiveChinaDao2;
 
-    public LiveChinaPapupWindow(Context context, List<LiVeChinaBean.AlllistBean> listalllistBeen,List<LiVeChinaBean.TablistBean> listtablistBeen) {
+    public LiveChinaPapupWindow(final Context context) {
         super(context);
-        this.listalllistBeen = listalllistBeen;
-        this.listtablistBeen =listtablistBeen;
         //计算宽度和高度
         calWidthAndHeight(context);
         setWidth(mWidth);
@@ -57,82 +60,101 @@ public class LiveChinaPapupWindow extends PopupWindow {
             @Override
             public void onClick(View view) {
                 dismiss();
+
             }
         });
-        if (pupBianji.getText().equals("编辑")){
-            pupBianji.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pupBianji.setText("完成");
-                }
-            });
 
-        }else {
-            pupBianji.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pupBianji.setText("编辑");
-                }
-            });
-        }
-
-
-
+        initDao();
         initGridLayout();
         pupBianji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BIANJI+=1;
-                switch (BIANJI%2){
-                    case 0:
-                        pupBianji.setText("完成");
+                if(pupBianji.getText().equals("编辑")){
+                    pupBianji.setText("完成");
                         gridT.setOnItemClickListener(new LiVeChinaGridLayout.OnItemClickListener() {
                             @Override
                             public void onItemClick(TextView tv) {
+                                String s = tv.getText().toString();
                                 gridT.removeView(tv);
-                                gridQ.addItem(tv.getText().toString());
-
+                                gridQ.addItem(s);
+                                ShuLiveChina shuLiveChina = new ShuLiveChina();
+                                shuLiveChina.setTitle(s);
+                                shuLiveChinaDao.insert(shuLiveChina);
+                                shuLiveChinaDao2.delete(shuLiveChina);
                             }
                         });
                         gridQ.setOnItemClickListener(new LiVeChinaGridLayout.OnItemClickListener() {
                             @Override
                             public void onItemClick(TextView tv) {
+                                String s = tv.getText().toString();
                                 gridQ.removeView(tv);
-                                gridT.addItem(tv.getText().toString());
+                                gridT.addItem(s);
+                                ShuLiveChina shuLiveChina = new ShuLiveChina();
+                                shuLiveChina.setTitle(s);
+                                shuLiveChinaDao2.insert(shuLiveChina);
+                                shuLiveChinaDao.delete(shuLiveChina);
                             }
                         });
-                        break;
-                    case 1:
-                        pupBianji.setText("编辑");
-                        gridT.setClickable(false);
-                        gridQ.setClickable(false);
-                        break;
+                }else {
+                    pupBianji.setText("编辑");
+                    gridT.setOnItemClickListener(new LiVeChinaGridLayout.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(TextView tv) {
+                            String s =  tv.getText().toString();
+
+                        }
+                    });
+                    gridQ.setOnItemClickListener(new LiVeChinaGridLayout.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(TextView tv) {
+                            String s = tv.getText().toString();
+
+                        }
+                    });
                 }
-
-
 
             }
         });
+
 
 
 
 
     }
 
+    private void initDao() {
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context,"livechina.db");
+        DaoMaster daoMaster = new DaoMaster(devOpenHelper.getReadableDb());
+        DaoSession daoSession = daoMaster.newSession();
+        shuLiveChinaDao = daoSession.getShuLiveChinaDao();
+
+
+
+        DaoMaster.DevOpenHelper devOpenHelper2 = new DaoMaster.DevOpenHelper(context,"livechina2.db");
+        DaoMaster daoMaster2 = new DaoMaster(devOpenHelper2.getReadableDb());
+        DaoSession daoSession2 = daoMaster2.newSession();
+        shuLiveChinaDao2 = daoSession2.getShuLiveChinaDao();
+    }
+
     private void initGridLayout() {
         gridQ.setEnableDrag(true);
-        list1 = new ArrayList<String>();
-        for (int i = 0; i < listtablistBeen.size(); i++) {
-
-            list1.add(listtablistBeen.get(i).getTitle());
-
+        list1 = new ArrayList<>();
+        List<ShuLiveChina> listShus1 = shuLiveChinaDao.queryBuilder().list();
+        for (int i = 0; i < listShus1.size(); i++) {
+            String title = listShus1.get(i).getTitle();
+            list1.add(title);
         }
         gridQ.setItemList(list1);
 
+
+
+
         gridT.setEnableDrag(false);
         list2 = new ArrayList<String>();
-        for (int i = 0; i < listalllistBeen.size(); i++) {
-            list2.add(listalllistBeen.get(i).getTitle());
+        List<ShuLiveChina> listShus2 = shuLiveChinaDao2.queryBuilder().list();
+        for (int i = 0; i < listShus2.size(); i++) {
+            String title = listShus2.get(i).getTitle();
+            list2.add(title);
         }
         gridT.setItemList(list2);
 

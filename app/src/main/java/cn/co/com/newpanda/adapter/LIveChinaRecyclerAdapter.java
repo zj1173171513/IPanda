@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.co.com.newpanda.R;
-import cn.co.com.newpanda.model.entity.ZiLiveChinaBean;
+import cn.co.com.newpanda.model.entity.livechinaBean.ZiLiveChinaBean;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**

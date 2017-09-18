@@ -1,4 +1,4 @@
-package cn.co.com.newpanda.model.entity;
+package cn.co.com.newpanda.model.entity.livechinaBean;
 
 import java.util.List;
 
