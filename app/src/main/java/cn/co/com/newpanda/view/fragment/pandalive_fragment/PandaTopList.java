@@ -1,9 +1,11 @@
 package cn.co.com.newpanda.view.fragment.pandalive_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import cn.co.com.newpanda.app.App;
 import cn.co.com.newpanda.base.BaseFragment;
 import cn.co.com.newpanda.model.entity.pandaliveBean.TopBean;
 import cn.co.com.newpanda.module.home.contract.TopContract;
+import cn.co.com.newpanda.view.activity.pandaliveActivity.VideoActivity;
 import cn.co.com.newpanda.view.listview.MyListView;
 
 /**
@@ -45,6 +48,17 @@ public class PandaTopList extends BaseFragment implements TopContract.View {
     @Override
     protected void loadData() {
         topPresnter.start();
+        onClickListener();
+    }
+    private void onClickListener() {
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), VideoActivity.class);
+                intent.putExtra("WonderfulURL", topList.get(i).getVid());
+                startActivity(intent);
+            }
+        });
     }
     @Override
     public void setPresenter(TopContract.TopPresnter topPresnter) {

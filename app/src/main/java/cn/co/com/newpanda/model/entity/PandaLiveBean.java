@@ -2,158 +2,49 @@ package cn.co.com.newpanda.model.entity;
 
 import java.util.List;
 
-
 public class PandaLiveBean {
 
+    private List<ListBean> list;
 
-    /**
-     * live : [{"title":"成都基地高清精切线路","brief":"翻身、吃饭、睡觉、喝奶、打闹、攀爬\u2026\u2026这里是成都大熊猫繁育研究基地，24小时高清直播大熊猫生活实况的地方。成年园、幼年园、幼儿园、母子园、一号别墅，11路直播信号28个摄像头，让你零距离了解国宝们的日常起居。","image":"http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2016/1/5/1451989464985_497.jpg","id":"ipanda","isshow":"true","url":"http://live.ipanda.com/stream/"}]
-     * bookmark : {"multiple":[{"title":"多视角直播","url":"http://www.ipanda.com/kehuduan/PAGE14501769230331752/PAGE14501787896813312/index.json","order":"1"}],"watchTalk":[{"title":"边看边聊","url":"zhiboye_chat","order":"1"}]}
-     */
-
-    private BookmarkBean bookmark;
-    private List<LiveBean> live;
-
-    public BookmarkBean getBookmark() {
-        return bookmark;
+    public List<ListBean> getList() {
+        return list;
     }
 
-    public void setBookmark(BookmarkBean bookmark) {
-        this.bookmark = bookmark;
+    public void setList(List<ListBean> list) {
+        this.list = list;
     }
 
-    public List<LiveBean> getLive() {
-        return live;
-    }
-
-    public void setLive(List<LiveBean> live) {
-        this.live = live;
-    }
-
-    public static class BookmarkBean {
-        private List<MultipleBean> multiple;
-        private List<WatchTalkBean> watchTalk;
-
-        public List<MultipleBean> getMultiple() {
-            return multiple;
-        }
-
-        public void setMultiple(List<MultipleBean> multiple) {
-            this.multiple = multiple;
-        }
-
-        public List<WatchTalkBean> getWatchTalk() {
-            return watchTalk;
-        }
-
-        public void setWatchTalk(List<WatchTalkBean> watchTalk) {
-            this.watchTalk = watchTalk;
-        }
-
-        public static class MultipleBean {
-            /**
-             * title : 多视角直播
-             * url : http://www.ipanda.com/kehuduan/PAGE14501769230331752/PAGE14501787896813312/index.json
-             * order : 1
-             */
-
-            private String title;
-            private String url;
-            private String order;
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public String getOrder() {
-                return order;
-            }
-
-            public void setOrder(String order) {
-                this.order = order;
-            }
-        }
-
-        public static class WatchTalkBean {
-            /**
-             * title : 边看边聊
-             * url : zhiboye_chat
-             * order : 1
-             */
-
-            private String title;
-            private String url;
-            private String order;
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public String getOrder() {
-                return order;
-            }
-
-            public void setOrder(String order) {
-                this.order = order;
-            }
-        }
-    }
-
-    public static class LiveBean {
+    public static class ListBean {
         /**
+         * url :
+         * image : http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2017/6/14/1497428381378_816.jpg
          * title : 成都基地高清精切线路
-         * brief : 翻身、吃饭、睡觉、喝奶、打闹、攀爬……这里是成都大熊猫繁育研究基地，24小时高清直播大熊猫生活实况的地方。成年园、幼年园、幼儿园、母子园、一号别墅，11路直播信号28个摄像头，让你零距离了解国宝们的日常起居。
-         * image : http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2016/1/5/1451989464985_497.jpg
+         * videoLength :
          * id : ipanda
-         * isshow : true
-         * url : http://live.ipanda.com/stream/
+         * daytime :
+         * type : 1
+         * pid :
+         * vid :
+         * order : 1
          */
 
-        private String title;
-        private String brief;
-        private String image;
-        private String id;
-        private String isshow;
         private String url;
+        private String image;
+        private String title;
+        private String videoLength;
+        private String id;
+        private String daytime;
+        private String type;
+        private String pid;
+        private String vid;
+        private String order;
 
-        public String getTitle() {
-            return title;
+        public String getUrl() {
+            return url;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getBrief() {
-            return brief;
-        }
-
-        public void setBrief(String brief) {
-            this.brief = brief;
+        public void setUrl(String url) {
+            this.url = url;
         }
 
         public String getImage() {
@@ -164,6 +55,22 @@ public class PandaLiveBean {
             this.image = image;
         }
 
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getVideoLength() {
+            return videoLength;
+        }
+
+        public void setVideoLength(String videoLength) {
+            this.videoLength = videoLength;
+        }
+
         public String getId() {
             return id;
         }
@@ -172,20 +79,44 @@ public class PandaLiveBean {
             this.id = id;
         }
 
-        public String getIsshow() {
-            return isshow;
+        public String getDaytime() {
+            return daytime;
         }
 
-        public void setIsshow(String isshow) {
-            this.isshow = isshow;
+        public void setDaytime(String daytime) {
+            this.daytime = daytime;
         }
 
-        public String getUrl() {
-            return url;
+        public String getType() {
+            return type;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getPid() {
+            return pid;
+        }
+
+        public void setPid(String pid) {
+            this.pid = pid;
+        }
+
+        public String getVid() {
+            return vid;
+        }
+
+        public void setVid(String vid) {
+            this.vid = vid;
+        }
+
+        public String getOrder() {
+            return order;
+        }
+
+        public void setOrder(String order) {
+            this.order = order;
         }
     }
 }

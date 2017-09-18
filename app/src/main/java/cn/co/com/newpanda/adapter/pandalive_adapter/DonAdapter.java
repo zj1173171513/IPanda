@@ -18,6 +18,8 @@ import cn.co.com.newpanda.model.entity.pandaliveBean.DonBean;
 
 public class DonAdapter extends AbsAdapter<DonBean.VideoBean> {
 
+
+
     public DonAdapter(Context context, int layoutId, List<DonBean.VideoBean> datas) {
         super(context, layoutId, datas);
     }
@@ -35,8 +37,5 @@ public class DonAdapter extends AbsAdapter<DonBean.VideoBean> {
         donLen.setText(data.getLen());
         donTitle.setText(data.getT());
 
-
     }
-
-
 }

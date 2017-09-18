@@ -1,100 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+    <RelativeLayout
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal">
 
+        <ImageView
+            android:id="@+id/pandaLiveImg"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="100dp">
-
-                <ImageView
-                    android:id="@+id/pandaLiveImg"
-                    android:layout_width="120dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@mipmap/ic_launcher"
-
-                    />
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/pandaLiveImg"
-                    android:layout_alignLeft="@+id/pandaLiveImg"
-                    android:layout_alignStart="@+id/pandaLiveImg"
-                    android:layout_marginLeft="7dp"
-                    android:src="@mipmap/default_time_view" />
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/lpanda_live_layer"
-                    android:layout_alignTop="@+id/imageView"
-                    android:layout_alignLeft="@+id/imageView"
-                    android:layout_alignStart="@+id/imageView" />
-
-                <TextView
-                    android:id="@+id/pandaLiveLen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Live"
-                    android:textColor="@color/biz_audio_progress_first"
-                    android:layout_alignBottom="@+id/pandaLiveImg"
-                    android:layout_toRightOf="@+id/imageView2"
-                    android:layout_toEndOf="@+id/imageView2" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/pandaLiveTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="1512111"
-                    android:textColor="#000"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/pandaLiveDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:text="timie"
-                    android:textSize="10sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/aaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/pandaLiveImg"
+            android:layout_alignLeft="@+id/pandaLiveImg"
+            android:layout_marginLeft="1dp"
+            android:src="@mipmap/default_time_view" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="#fff"
-            android:text="jianjie"
-            android:textColor="#000"
-            android:textSize="10sp" />
-    </LinearLayout>
-</RelativeLayout>
+            android:id="@+id/item_list_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/aaa"
+            android:layout_marginLeft="22dp"
+            android:text="Live"
+            android:textColor="#eee" />
+
+        <ImageView
+            android:id="@+id/ccc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/lpanda_live_layer"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/aaa"
+            android:layout_alignStart="@+id/aaa" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/livetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="3dp"
+        android:text="aaaaaaaa"
+        android:textColor="#000"
+        android:textSize="13dp" />
+</LinearLayout>

@@ -1,12 +1,13 @@
 package cn.co.com.newpanda.view.fragment.pandalive_fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import cn.co.com.newpanda.app.App;
 import cn.co.com.newpanda.base.BaseFragment;
 import cn.co.com.newpanda.model.entity.pandaliveBean.DonBean;
 import cn.co.com.newpanda.module.home.contract.DonModelContract;
+import cn.co.com.newpanda.view.activity.pandaliveActivity.VideoActivity;
 import cn.co.com.newpanda.view.listview.MyListView;
 
 /**
@@ -27,20 +29,17 @@ import cn.co.com.newpanda.view.listview.MyListView;
  */
 public class DontLetTheMale extends BaseFragment implements DonModelContract.View {
 
-
     DonModelContract.DonPresnter donPresnter;
     @BindView(R.id.pandaLiveListView)
     MyListView pandaLiveListView;
     Unbinder unbinder;
-
-
     List<DonBean.VideoBean> donList = new ArrayList<>();
-    private DonAdapter donAdapter;
+    DonAdapter donAdapter;
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_dont_let_the_male;
+        return R.layout.fragment_panda_toplist;
     }
 
     @Override
@@ -51,12 +50,26 @@ public class DontLetTheMale extends BaseFragment implements DonModelContract.Vie
     @Override
     protected void loadData() {
         donPresnter.start();
+        onClickListener();
+    }
+
+    private void onClickListener() {
+
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), VideoActivity.class);
+                intent.putExtra("WonderfulURL", donList.get(i).getVid());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void setPresenter(DonModelContract.DonPresnter donPresnter) {
         this.donPresnter = donPresnter;
     }
+
     @Override
     public void showProgressDialog() {
 
@@ -75,9 +88,10 @@ public class DontLetTheMale extends BaseFragment implements DonModelContract.Vie
 
     }
 
+
     @Override
     public void showMessage(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -85,18 +99,15 @@ public class DontLetTheMale extends BaseFragment implements DonModelContract.Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_dont_let_the_male, container, false);
+        View view = inflater.inflate(R.layout.fragment_panda_toplist, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
-
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
     }
-
-
 
 }

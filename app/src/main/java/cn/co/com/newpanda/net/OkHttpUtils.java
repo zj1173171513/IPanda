@@ -25,6 +25,7 @@ public class OkHttpUtils implements IHttp {
 
     private OkHttpClient okHttpClient;
 
+
     //构造函数私有化
     private OkHttpUtils() {
         okHttpClient = new OkHttpClient.Builder().build();
@@ -43,6 +44,13 @@ public class OkHttpUtils implements IHttp {
         return okHttpUtils;
     }
 
+    public void sendGet(String url, Callback callback) {
+        Request request = new Request.Builder().url(url).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(callback);
+
+    }
+
     /**
      * 发送get请求
      *
@@ -51,6 +59,8 @@ public class OkHttpUtils implements IHttp {
      * @param callback 回调
      * @param <T>      请求回来的数据对应的JavaBean
      */
+
+
     @Override
     public <T> void get(String url, Map<String, String> params, final MyNetWorkCallback<T> callback) {
 

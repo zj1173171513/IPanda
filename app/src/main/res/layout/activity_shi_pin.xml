@@ -11,7 +11,9 @@
     <fm.jiecao.jcvideoplayer_lib.JCVideoPlayer
         android:id="@+id/videocontroller"
         android:layout_width="match_parent"
-        android:layout_height="200dp"></fm.jiecao.jcvideoplayer_lib.JCVideoPlayer>
+        android:layout_height="200dp">
+
+    </fm.jiecao.jcvideoplayer_lib.JCVideoPlayer>
 
     <TextView
         android:layout_width="match_parent"

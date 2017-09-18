@@ -1,12 +1,14 @@
 package cn.co.com.newpanda.view.fragment.pandalive_fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import cn.co.com.newpanda.app.App;
 import cn.co.com.newpanda.base.BaseFragment;
 import cn.co.com.newpanda.model.entity.pandaliveBean.ThingsBean;
 import cn.co.com.newpanda.module.home.contract.ThingsContract;
+import cn.co.com.newpanda.view.activity.pandaliveActivity.VideoActivity;
 import cn.co.com.newpanda.view.listview.MyListView;
 
 /**
@@ -46,6 +49,18 @@ public class PandaThoseThings extends BaseFragment implements ThingsContract.Vie
     @Override
     protected void loadData() {
         thingsPresenter.start();
+        onClickListener();
+    }
+
+    private void onClickListener() {
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), VideoActivity.class);
+                intent.putExtra("WonderfulURL", thingsList.get(i).getVid());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -69,8 +84,8 @@ public class PandaThoseThings extends BaseFragment implements ThingsContract.Vie
         thingsList.addAll(thingsBean.getVideo());
         thingsAdapter = new ThingsAdapter(App.context, R.layout.pandalive_list_item, thingsList);
         pandaLiveListView.setAdapter(thingsAdapter);
-        Log.e("TAG",thingsBean.getVideo().get(0).getT());
-        Log.e("TAG",thingsList.size()+"");
+//        Log.e("TAG",thingsBean.getVideo().get(0).getT());
+//        Log.e("TAG",thingsList.size()+"");
     }
 
     @Override

@@ -1,12 +1,13 @@
 package cn.co.com.newpanda.view.fragment.pandalive_fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,13 +23,14 @@ import cn.co.com.newpanda.app.App;
 import cn.co.com.newpanda.base.BaseFragment;
 import cn.co.com.newpanda.model.entity.pandaliveBean.WonderfuMomentBean;
 import cn.co.com.newpanda.module.home.contract.WonderfulMomentContract;
+import cn.co.com.newpanda.view.activity.pandaliveActivity.VideoActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class WonderfulMoment extends BaseFragment implements WonderfulMomentContract.View {
 
-
+    String url = "http://www.ipanda.com/kehuduan/video/index.json";
     @BindView(R.id.pandaLiveListView)
     ListView pandaLiveListView;
     Unbinder unbinder;
@@ -51,18 +53,20 @@ public class WonderfulMoment extends BaseFragment implements WonderfulMomentCont
     protected void loadData() {
         pandaLiveList = new ArrayList<>();
         presenter.start();
-
+        onClickListener();
+    }
+    private void onClickListener() {
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), VideoActivity.class);
+                intent.putExtra("WonderfulURL", pandaLiveList.get(i).getVid());
+                startActivity(intent);
+            }
+        });
     }
 
-//    private void initView() {
-//       pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//           @Override
-//           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//               startActivity(new Intent(getContext(), AAActivity.class));
-//           }
-//       });
-//
-//    }
+
 
     @Override
     public void setPresenter(WonderfulMomentContract.WonderPresenter presenter) {
@@ -84,7 +88,7 @@ public class WonderfulMoment extends BaseFragment implements WonderfulMomentCont
     @Override
     public void setResult(WonderfuMomentBean wonderfuMomentBean) {
         pandaLiveList.addAll(wonderfuMomentBean.getVideo());
-        Log.e("TAG", "setResult: " + pandaLiveList.size());
+        //Log.e("TAG", "setResult: " + pandaLiveList.size());
         wonderFuAdapter = new WonderFuAdapter(App.context, R.layout.pandalive_list_item, pandaLiveList);
         pandaLiveListView.setAdapter(wonderFuAdapter);
 

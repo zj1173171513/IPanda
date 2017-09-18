@@ -1,11 +1,13 @@
 package cn.co.com.newpanda.view.fragment.pandalive_fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import cn.co.com.newpanda.app.App;
 import cn.co.com.newpanda.base.BaseFragment;
 import cn.co.com.newpanda.model.entity.pandaliveBean.PandaArchivesBean;
 import cn.co.com.newpanda.module.home.contract.PandaArchivesModeContract;
+import cn.co.com.newpanda.view.activity.pandaliveActivity.VideoActivity;
 import cn.co.com.newpanda.view.listview.MyListView;
 
 /**
@@ -49,7 +52,17 @@ public class PandaArchives extends BaseFragment implements PandaArchivesModeCont
     @Override
     protected void loadData() {
         pandaArchivesPresenter.start();
-
+        onClickListener();
+    }
+    private void onClickListener() {
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), VideoActivity.class);
+                intent.putExtra("WonderfulURL", pandaArchList.get(i).getVid());
+                startActivity(intent);
+            }
+        });
     }
     @Override
     public void setPresenter(PandaArchivesModeContract.PandaArchivesPresenter pandaArchivesPresenter) {
