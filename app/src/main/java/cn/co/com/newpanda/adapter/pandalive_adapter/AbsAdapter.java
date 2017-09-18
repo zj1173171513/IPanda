@@ -17,7 +17,7 @@ public abstract class AbsAdapter<T> extends BaseAdapter {
 	public AbsAdapter(Context context, int layoutId, List<T> datas) {
 		super();
 		this.datas=datas;
-		this.context = context;
+	 	this.context = context;
 		this.layoutId = layoutId;
 	}
 

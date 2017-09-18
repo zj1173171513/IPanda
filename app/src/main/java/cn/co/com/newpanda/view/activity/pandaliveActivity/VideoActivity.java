@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import cn.co.com.newpanda.R;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-
+//视频Acticity
 public class VideoActivity extends AppCompatActivity {
 
     private JCVideoPlayer pandalivevideo;
