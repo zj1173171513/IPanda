@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chanven.lib.cptr.recyclerview.RecyclerAdapterWithHF;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -56,6 +57,14 @@ public class MuchliveFragment extends BaseFragment {
         myRecyclerView.setLayoutManager(gridLayoutManager);
         myRecyclerView.setHasFixedSize(true);
         mAdapter = new MyRecycleAdapter(getActivity(), pandalist);
+        RecyclerAdapterWithHF withHF = new RecyclerAdapterWithHF(mAdapter);
+        myRecyclerView.setAdapter(withHF);
+        withHF.setOnItemClickListener(new RecyclerAdapterWithHF.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerAdapterWithHF adapter, RecyclerView.ViewHolder vh, int position) {
+
+            }
+        });
         myRecyclerView.setAdapter(mAdapter);
 
         OkHttpUtils.getInstance().sendGet(HOMELIVE, new Callback() {

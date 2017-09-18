@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -17,9 +18,11 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 public class VideoActivity extends AppCompatActivity implements IGetView<Video_Bean> {
 
-    @BindView(R.id.videocontroller1)
-    JCVideoPlayer videocontroller1;
 
+    @BindView(R.id.pandalivevideo)
+    JCVideoPlayer pandalivevideo;
+    @BindView(R.id.activity_video)
+    LinearLayout activityVideo;
     private MPresenter mPresenter;
     private String title;
     private String url;
@@ -38,7 +41,7 @@ public class VideoActivity extends AppCompatActivity implements IGetView<Video_B
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
         title = intent.getStringExtra("title");
-        Log.e("TAG",url);
+        Log.e("TAG", url);
         mPresenter.getVideoData(url);
     }
 
@@ -60,7 +63,7 @@ public class VideoActivity extends AppCompatActivity implements IGetView<Video_B
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                videocontroller1.setUp(url, title);
+                pandalivevideo.setUp(url, title);
             }
         });
     }

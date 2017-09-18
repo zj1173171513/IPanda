@@ -39,12 +39,13 @@
         </activity>
         <activity android:name=".view.activity.TwoActivity" />
         <activity android:name=".view.activity.BillowingVideoActicity.ShiPinActivity" />
-        <activity android:name=".view.activity.pandaliveActivity.VideoActivity"
-            android:screenOrientation="portrait"
-            >
-
-
+        <activity
+            android:name=".view.activity.pandaliveActivity.VideoActivity"
+            android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".module.home.homeactivity.VideoActivity" />
+        <activity android:name=".module.home.homeactivity.InteractionActivity" />
+        <activity android:name=".module.home.homeactivity.WebViewActivity" />
     </application>
 
 </manifest>
