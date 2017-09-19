@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ import cn.co.com.newpanda.module.home.homeview.IGetView;
 public class InteractionActivity extends Base_Activity implements IGetView<InfoBean> {
     private List<InfoBean.InteractiveBean> mList = new ArrayList<>();
     private ProgressDialog progressDialog;
-
+    //更新
     @BindView(R.id.interaction_Listview)
     ListView interactionListview;
     private MPresenter mPresenter;
 
     @BindView(R.id.interaction_finish)
-    TextView interactionFinish;
+    ImageView interactionFinish;
     @BindView(R.id.inter_toolbar)
     Toolbar interToolbar;
     private InteractionAdapter interactionAdapter;
@@ -73,7 +73,6 @@ public class InteractionActivity extends Base_Activity implements IGetView<InfoB
                 Intent intent = new Intent(InteractionActivity.this,WebViewActivity.class);
                 intent.putExtra("title",mList.get(i).getTitle());
                 intent.putExtra("url",mList.get(i).getUrl());
-
                 startActivity(intent);
             }
         });

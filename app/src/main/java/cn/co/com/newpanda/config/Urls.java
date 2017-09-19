@@ -102,7 +102,8 @@ public class Urls {
     //播报跳转
     public static final String BOBAOXIANGQING = "http://api.cntv.cn/article/contentinfo";
     public static final String CHINADIMING = BASEURL + "PAGE14501775094142282/index.json";
-
+    //熊猫播报的re
+    public static final String PANDABROADCASTINFO = "http://api.cntv.cn/apicommon/index?path=iphoneInterface/general/getArticleAndVideoListInfo.json&primary_id=PAGE1422435191506336&serviceId=panda";
 
 }
 

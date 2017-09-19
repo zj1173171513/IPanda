@@ -18,7 +18,7 @@ import butterknife.Unbinder;
 import cn.co.com.newpanda.adapter.LIveChinaRecyclerAdapter;
 import cn.co.com.newpanda.R;
 import cn.co.com.newpanda.base.BaseFragment;
-import cn.co.com.newpanda.model.entity.ZiLiveChinaBean;
+import cn.co.com.newpanda.model.entity.livechinaBean.ZiLiveChinaBean;
 import cn.co.com.newpanda.net.OkHttpUtils;
 import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
 

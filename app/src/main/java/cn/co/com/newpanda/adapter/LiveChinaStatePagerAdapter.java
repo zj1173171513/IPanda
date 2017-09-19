@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
-import cn.co.com.newpanda.model.entity.LiVeChinaBean;
+import cn.co.com.newpanda.model.entity.livechinaBean.ShuLiveChina;
 
 /**
  * Created by Administrator on 2017/09/14.
@@ -14,13 +14,13 @@ import cn.co.com.newpanda.model.entity.LiVeChinaBean;
 
 public class LiveChinaStatePagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> listfrag;
-    private List<LiVeChinaBean.TablistBean> listtablistBeen;
+    private List<ShuLiveChina> listdao;
+    private LiveChinaStatePagerAdapter liveChinaStatePagerAdapter;
 
-
-    public LiveChinaStatePagerAdapter(FragmentManager fm, List<Fragment> listfrag, List<LiVeChinaBean.TablistBean> listtablistBeen) {
+    public LiveChinaStatePagerAdapter(FragmentManager fm, List<Fragment> listfrag, List<ShuLiveChina> listdao) {
         super(fm);
         this.listfrag = listfrag;
-        this.listtablistBeen = listtablistBeen;
+        this.listdao = listdao;
     }
 
     @Override
@@ -30,11 +30,11 @@ public class LiveChinaStatePagerAdapter extends FragmentStatePagerAdapter {
     }
     @Override
     public int getCount() {
-        return listtablistBeen.size();
+        return listdao.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return listtablistBeen.get(position).getTitle();
+        return listdao.get(position).getTitle();
     }
 }
