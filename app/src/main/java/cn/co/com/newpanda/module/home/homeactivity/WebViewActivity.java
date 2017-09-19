@@ -8,8 +8,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.umeng.socialize.UMShareAPI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,8 +53,8 @@ public class WebViewActivity extends Base_Activity {
         webToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(WebViewActivity.this, "1111111111111", Toast.LENGTH_SHORT).show();
-                return true;
+                    PopupWindow popupWindow = new PopupWindow(WebViewActivity.this);
+                    return true;
             }
         });
     }
@@ -79,6 +81,12 @@ public class WebViewActivity extends Base_Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
 }

@@ -73,7 +73,6 @@ public class InteractionActivity extends Base_Activity implements IGetView<InfoB
                 Intent intent = new Intent(InteractionActivity.this,WebViewActivity.class);
                 intent.putExtra("title",mList.get(i).getTitle());
                 intent.putExtra("url",mList.get(i).getUrl());
-
                 startActivity(intent);
             }
         });
