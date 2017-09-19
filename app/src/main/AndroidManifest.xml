@@ -41,11 +41,11 @@
         <activity android:name=".view.activity.BillowingVideoActicity.ShiPinActivity" />
         <activity
             android:name=".view.activity.pandaliveActivity.VideoActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".module.home.homeactivity.VideoActivity" />
         <activity android:name=".module.home.homeactivity.InteractionActivity" />
         <activity android:name=".module.home.homeactivity.WebViewActivity" />
+        <activity android:name=".view.activity.PersonalActivity"></activity>
     </application>
 
 </manifest>

@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class InteractionActivity extends Base_Activity implements IGetView<InfoB
     private MPresenter mPresenter;
 
     @BindView(R.id.interaction_finish)
-    TextView interactionFinish;
+    ImageView interactionFinish;
     @BindView(R.id.inter_toolbar)
     Toolbar interToolbar;
     private InteractionAdapter interactionAdapter;

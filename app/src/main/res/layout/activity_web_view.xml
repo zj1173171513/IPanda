@@ -6,20 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/web_linearlayout"
-    tools:context="com.jiyun.asus.panda.ui.activity.WebViewActivity">
+    tools:context=".module.home.homeactivity.WebViewActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/web_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
 
-        <TextView
+        <ImageView
             android:id="@+id/web_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="《"
-            android:textColor="@color/white"
-            android:textSize="40dp" />
+            android:src="@mipmap/ic_chevron_left_white_36dp"/>
 
         <TextView
             android:id="@+id/web_title"

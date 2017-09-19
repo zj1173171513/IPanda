@@ -2,6 +2,7 @@ package cn.co.com.newpanda.module.home;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ import cn.co.com.newpanda.module.home.adapter.HomeAdapter;
 
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
+    @BindView(R.id.swipe_refresh_widget)
+    SwipeRefreshLayout swipeRefreshWidget;
     private ProgressDialog progressDialog;
     HomeContract.Presenter presenter;
     @BindView(R.id.home_recy)
@@ -37,7 +40,24 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void init(View view) {
+        swipeRefreshWidget.setRefreshing(false);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        homeRecy.setLayoutManager(manager);
+        homeAdapter = new HomeAdapter(mList, getActivity());
+        homeRecy.setAdapter(homeAdapter);
+
         progressDialog = new ProgressDialog(getActivity());
+        swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mList.clear();
+                presenter.start();
+                homeAdapter.notifyDataSetChanged();
+                swipeRefreshWidget.setRefreshing(false);
+            }
+        });
+
     }
 
     @Override
@@ -64,16 +84,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         for (int i = 0; i < 9; i++) {
             mList.add(data);
         }
-//        getActivity().runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-                LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-                manager.setOrientation(LinearLayoutManager.VERTICAL);
-                homeRecy.setLayoutManager(manager);
-                homeAdapter = new HomeAdapter(mList, getActivity());
-                homeRecy.setAdapter(homeAdapter);
-//            }
-//        });
+        homeAdapter.notifyDataSetChanged();
     }
 
     @Override

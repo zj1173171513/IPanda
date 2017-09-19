@@ -322,6 +322,7 @@ public class TwoActivity extends BaseActivity {
                 startActivity(new Intent(TwoActivity.this,InteractionActivity.class));
                 break;
             case R.id.twoLonge:
+                startActivity(new Intent(TwoActivity.this,PersonalActivity.class));
                 break;
         }
     }

@@ -2,11 +2,14 @@ package cn.co.com.newpanda.module.home.homeactivity;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,7 +21,7 @@ public class WebViewActivity extends Base_Activity {
 
 
     @BindView(R.id.web_finish)
-    TextView webFinish;
+    ImageView webFinish;
     @BindView(R.id.web_title)
     TextView webTitle;
     @BindView(R.id.web_toolbar)
@@ -44,6 +47,14 @@ public class WebViewActivity extends Base_Activity {
     @Override
     public void initView() {
         ButterKnife.bind(this);
+        webToolbar.inflateMenu(R.menu.webright);
+        webToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(WebViewActivity.this, "1111111111111", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     @Override
