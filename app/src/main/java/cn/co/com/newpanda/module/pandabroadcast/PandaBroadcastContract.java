@@ -1,5 +1,10 @@
 package cn.co.com.newpanda.module.pandabroadcast;
 
+import cn.co.com.newpanda.base.BasePresenter;
+import cn.co.com.newpanda.base.BaseView;
+import cn.co.com.newpanda.model.entity.BoBaoBean.PandaBroadCastBean;
+import cn.co.com.newpanda.model.entity.BoBaoBean.PandaBroadcastInfoBean;
+
 /**
  * Created by Administrator on 2017/9/12.
  * 作者：大姨夫
@@ -8,4 +13,14 @@ package cn.co.com.newpanda.module.pandabroadcast;
  */
 
 public interface PandaBroadcastContract {
+    interface View extends BaseView<Presenter> {
+        void showProgressDialog();
+        void dismissDialog();
+        void setResult(PandaBroadCastBean pdbcBean);
+        void showMessage(String msg);
+        void setInfo(PandaBroadcastInfoBean pdbcInfoBean);
+    }
+    interface Presenter extends BasePresenter {
+
+    }
 }
