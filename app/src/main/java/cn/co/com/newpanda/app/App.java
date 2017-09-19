@@ -14,7 +14,7 @@ import cn.co.com.newpanda.base.BaseActivity;
 
 public class App extends Application {
 
-//    去你大爷的你
+//    去你大爷的你的
 
     public static BaseActivity context = null;
     {
