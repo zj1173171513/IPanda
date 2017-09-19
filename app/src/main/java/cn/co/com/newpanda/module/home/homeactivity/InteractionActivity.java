@@ -24,7 +24,7 @@ import cn.co.com.newpanda.module.home.homeview.IGetView;
 public class InteractionActivity extends Base_Activity implements IGetView<InfoBean> {
     private List<InfoBean.InteractiveBean> mList = new ArrayList<>();
     private ProgressDialog progressDialog;
-
+    //更新
     @BindView(R.id.interaction_Listview)
     ListView interactionListview;
     private MPresenter mPresenter;
