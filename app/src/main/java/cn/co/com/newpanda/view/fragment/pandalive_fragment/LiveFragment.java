@@ -64,8 +64,13 @@ public class LiveFragment extends BaseFragment implements TabLayout.OnTabSelecte
 
     @Override
     protected void init(View view) {
+//        Bundle bundle = new Bundle();
+//        String title = bundle.getString("title");
+//        int img = bundle.getInt("img");
+//        pandaTitle.setText(title);
 
     }
+
 
     @Override
     protected void loadData() {
@@ -112,7 +117,7 @@ public class LiveFragment extends BaseFragment implements TabLayout.OnTabSelecte
                                 break;
                             case 1:
                                 i = 0;
-                                bridf.setText("1111111111");
+                                bridf.setText("");
                                 bridf.setVisibility(View.GONE);
                                 break;
                         }
@@ -122,6 +127,7 @@ public class LiveFragment extends BaseFragment implements TabLayout.OnTabSelecte
             }
         });
         return rootView;
+
     }
 
 

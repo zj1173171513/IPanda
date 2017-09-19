@@ -21,6 +21,8 @@ import cn.co.com.newpanda.model.entity.PandaLiveBean;
 public class MyRecycleAdapter extends RecyclerView.Adapter{
     public Context context;
     private ArrayList<PandaLiveBean.ListBean> pandalist = new ArrayList<>();
+    private OnItemClickListener onItemClickListener;
+    private boolean includeEdge;
 
     public MyRecycleAdapter(Context context, ArrayList<PandaLiveBean.ListBean> pandalist) {
         this.context = context;
@@ -48,8 +50,18 @@ public class MyRecycleAdapter extends RecyclerView.Adapter{
         return pandalist.size();
     }
 
-    //自定义的ViewHolder，持有每个Item的的所有界面元素
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+
+    public interface OnItemClickListener{
+
+        void click(int adapterPosition);
+    }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    //自定义的ViewHolder
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView livetitle;
         private ImageView pandaLiveImg;
 
@@ -57,6 +69,13 @@ public class MyRecycleAdapter extends RecyclerView.Adapter{
             super(view);
             livetitle = view.findViewById(R.id.livetitle);
             pandaLiveImg = view.findViewById(R.id.pandaLiveImg);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (onItemClickListener !=null)
+                onItemClickListener.click(getAdapterPosition());
         }
     }
 }

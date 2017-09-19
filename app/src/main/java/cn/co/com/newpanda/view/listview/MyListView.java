@@ -95,14 +95,7 @@ public class MyListView extends ListView implements AbsListView.OnScrollListener
             loadingMoreFooter.addFootLoadingView(view);
         }
 
-
-
     }
-
-
-
-
-
 
     //设置加载更多监听
     public void setLoadMoreListener(LoadMoreListener listener) {
@@ -133,6 +126,8 @@ public class MyListView extends ListView implements AbsListView.OnScrollListener
         //firstVisibleItem表示在屏幕第一个ListItem(部分显示的ListItem也算)在整个ListView的位置（下标从0开始）
         this.firstVisibleItem = firstVisibleItem;
     }
-
+    public interface onScroll {
+        void onScroll();
+    }
 
 }

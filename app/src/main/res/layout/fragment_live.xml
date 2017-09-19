@@ -18,13 +18,27 @@
         android:background="#fff"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/pandaTitle"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  [正在直播] 成都基地高清精切路线"
-            android:textColor="#000"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  [正在直播]   "
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/pandaTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成都基地高清精切路线"
+                android:textColor="#000"
+                android:textSize="15sp" />
+        </LinearLayout>
+
 
         <LinearLayout
 
@@ -49,10 +63,10 @@
         </LinearLayout>
 
         <TextView
-           android:textColor="#000"
             android:id="@+id/bridf"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:textColor="#000" />
 
     </LinearLayout>
 
