@@ -70,6 +70,7 @@ public class LiveChina extends BaseFragment {
         }
     };
     private ShuLiveChinaDao shuLiveChinaDao2;
+    private ShuLiveChinaDao shuLiveChinaDao3;
 
     @Override
     protected int getLayoutId() {
@@ -87,10 +88,24 @@ public class LiveChina extends BaseFragment {
         //请求
         OkHttpUtils.getInstance().get(LIVECHINA, null, new MyNetWorkCallback<LiVeChinaBean>() {
 
+            private List<ShuLiveChina> listShu2;
+
             @Override
             public void onSuccess(LiVeChinaBean liVeChinaBean) {
                 listalllistBeen.addAll(liVeChinaBean.getAlllist());
                 listtablistBeen.addAll(liVeChinaBean.getTablist());
+                List<ShuLiveChina> listShu3 =  shuLiveChinaDao3.queryBuilder().list();
+                if (listShu3.size()==0){
+                    for (int i = 0; i < listalllistBeen.size(); i++) {
+                        String title = listalllistBeen.get(i).getTitle();
+                        String url = listalllistBeen.get(i).getUrl();
+                        ShuLiveChina shuLiveChina = new ShuLiveChina();
+                        shuLiveChina.setTitle(title);
+                        shuLiveChina.setUrl(url);
+                        shuLiveChinaDao3.insert(shuLiveChina);
+                    }
+                }
+
                 List<ShuLiveChina> listShu1 = shuLiveChinaDao.queryBuilder().list();
                 if (listShu1.size()==0){
                     for (int i = 0; i < listtablistBeen.size(); i++) {
@@ -102,18 +117,20 @@ public class LiveChina extends BaseFragment {
                 }
                 List<ShuLiveChina> listShus1 = shuLiveChinaDao.queryBuilder().list();
                 listdao.addAll(listShus1);
+
                 for (int i = 0; i < listdao.size(); i++) {
-                    listfrag.add(new ZiLiveChinaFragment());
+                    String title = listdao.get(i).getTitle();
+                    ShuLiveChina unique = shuLiveChinaDao3.queryBuilder().where(ShuLiveChinaDao.Properties.Title.eq(title)).build().unique();
+                    String url = unique.getUrl();
+                    listfrag.add(new ZiLiveChinaFragment(url));
                 }
-                liveChinaStatePagerAdapter = new LiveChinaStatePagerAdapter(getActivity()
-                        .getSupportFragmentManager(),listfrag,listdao);
+                liveChinaStatePagerAdapter = new LiveChinaStatePagerAdapter(getActivity().getSupportFragmentManager(), listfrag,listdao);
                 tabChina.setupWithViewPager(pagerChina);
                 pagerChina.setAdapter(liveChinaStatePagerAdapter);
-                List<ShuLiveChina> listShu2 = shuLiveChinaDao2.queryBuilder().list();
+                List<ShuLiveChina> listShu2 =  shuLiveChinaDao2.queryBuilder().list();
                 if (listShu2.size()==0){
                     for (int i = 0; i < listalllistBeen.size(); i++) {
                         String title = listalllistBeen.get(i).getTitle();
-                        String url = listalllistBeen.get(i).getUrl();
                         ShuLiveChina shuLiveChina = new ShuLiveChina();
                         shuLiveChina.setTitle(title);
                         shuLiveChinaDao2.insert(shuLiveChina);
@@ -136,6 +153,18 @@ public class LiveChina extends BaseFragment {
                     public void onDismiss() {
                         // popupWindow隐藏时恢复屏幕正常透明度
                         setBackgroundAlpha();
+                        listdao.clear();
+                        List<ShuLiveChina> listSh = shuLiveChinaDao.queryBuilder().list();
+                        listdao.addAll(listSh);
+                        listfrag.clear();
+                        for (int i = 0; i < listdao.size(); i++) {
+                            String title = listdao.get(i).getTitle();
+                            ShuLiveChina unique = shuLiveChinaDao3.queryBuilder().where(ShuLiveChinaDao.Properties.Title.eq(title)).build().unique();
+                            String url = unique.getUrl();
+                            listfrag.add(new ZiLiveChinaFragment(url));
+                        }
+                        handler.sendEmptyMessage(0);
+
                     }
                 });
                 //点击时弹出PopupWindow，屏幕变暗
@@ -161,6 +190,13 @@ public class LiveChina extends BaseFragment {
         DaoMaster daoMaster2 = new DaoMaster(devOpenHelper2.getReadableDb());
         DaoSession daoSession2 = daoMaster2.newSession();
         shuLiveChinaDao2 = daoSession2.getShuLiveChinaDao();
+
+        DaoMaster.DevOpenHelper devOpenHelper3 = new DaoMaster.DevOpenHelper(context,"livechina5.db");
+        DaoMaster daoMaster3 = new DaoMaster(devOpenHelper3.getReadableDb());
+        DaoSession daoSession3 = daoMaster3.newSession();
+        shuLiveChinaDao3 = daoSession3.getShuLiveChinaDao();
+
+
     }
 
     public void setBackgroundAlpha() {

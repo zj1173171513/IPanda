@@ -80,7 +80,8 @@ public class LiveChinaPapupWindow extends PopupWindow {
                                 ShuLiveChina shuLiveChina = new ShuLiveChina();
                                 shuLiveChina.setTitle(s);
                                 shuLiveChinaDao.insert(shuLiveChina);
-                                shuLiveChinaDao2.delete(shuLiveChina);
+                                ShuLiveChina unique = shuLiveChinaDao2.queryBuilder().where(ShuLiveChinaDao.Properties.Title.eq(s)).build().unique();
+                                shuLiveChinaDao2.delete(unique);
                             }
                         });
                         gridQ.setOnItemClickListener(new LiVeChinaGridLayout.OnItemClickListener() {
@@ -92,7 +93,8 @@ public class LiveChinaPapupWindow extends PopupWindow {
                                 ShuLiveChina shuLiveChina = new ShuLiveChina();
                                 shuLiveChina.setTitle(s);
                                 shuLiveChinaDao2.insert(shuLiveChina);
-                                shuLiveChinaDao.delete(shuLiveChina);
+                                ShuLiveChina unique = shuLiveChinaDao.queryBuilder().where(ShuLiveChinaDao.Properties.Title.eq(s)).build().unique();
+                                shuLiveChinaDao.delete(unique);
                             }
                         });
                 }else {
@@ -100,14 +102,12 @@ public class LiveChinaPapupWindow extends PopupWindow {
                     gridT.setOnItemClickListener(new LiVeChinaGridLayout.OnItemClickListener() {
                         @Override
                         public void onItemClick(TextView tv) {
-                            String s =  tv.getText().toString();
 
                         }
                     });
                     gridQ.setOnItemClickListener(new LiVeChinaGridLayout.OnItemClickListener() {
                         @Override
                         public void onItemClick(TextView tv) {
-                            String s = tv.getText().toString();
 
                         }
                     });

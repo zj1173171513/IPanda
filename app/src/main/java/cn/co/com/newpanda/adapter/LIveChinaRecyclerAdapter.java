@@ -40,8 +40,7 @@ public class LIveChinaRecyclerAdapter extends RecyclerView.Adapter<LIveChinaRecy
 
     @Override
     public void onBindViewHolder(final MyHolder holder, final int position) {
-        holder.jcVideoPlayer.setUp("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096", "视频/MP3标题");
-//      videoController.ivThumb.setThumbInCustomProject("视频/MP3缩略图地址");
+        holder.jcVideoPlayer.setUp("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096", " ");
         holder.lc_name.setText(listliveBeen.get(position).getTitle());
         holder.lc_info.setText(listliveBeen.get(position).getBrief());
         holder.lc_info.setVisibility(View.GONE);

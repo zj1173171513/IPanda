@@ -15,7 +15,6 @@ import cn.co.com.newpanda.model.entity.livechinaBean.ShuLiveChina;
 public class LiveChinaStatePagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> listfrag;
     private List<ShuLiveChina> listdao;
-    private LiveChinaStatePagerAdapter liveChinaStatePagerAdapter;
 
     public LiveChinaStatePagerAdapter(FragmentManager fm, List<Fragment> listfrag, List<ShuLiveChina> listdao) {
         super(fm);
@@ -25,8 +24,8 @@ public class LiveChinaStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-        return listfrag.get(position);
+        Fragment fragment = listfrag.get(position);
+        return fragment;
     }
     @Override
     public int getCount() {
@@ -35,6 +34,8 @@ public class LiveChinaStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return listdao.get(position).getTitle();
+        String title = listdao.get(position).getTitle();
+        return title;
     }
+
 }
