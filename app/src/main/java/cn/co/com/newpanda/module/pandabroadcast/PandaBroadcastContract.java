@@ -15,7 +15,6 @@ import cn.co.com.newpanda.model.entity.BoBaoBean.PandaBroadcastInfoBean;
 public interface PandaBroadcastContract {
     interface View extends BaseView<Presenter> {
         void showProgressDialog();
-
         void setResult(PandaBroadCastBean pdbcBean);
         void showMessage(String msg);
         void setInfo(PandaBroadcastInfoBean pdbcInfoBean);
