@@ -1,5 +1,6 @@
 package cn.co.com.newpanda.view.activity.BillowingVideoActicity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +10,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +32,7 @@ import cn.co.com.newpanda.net.OkHttpUtils;
 import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
-public class ShiPinActivity extends AppCompatActivity {
+public class ShiPinActivity extends AppCompatActivity implements UMShareListener {
 
 
     int count = 0;
@@ -90,7 +98,6 @@ public class ShiPinActivity extends AppCompatActivity {
                         }
                         sanjiaohao.setImageResource(image[++count % image.length]);
                         break;
-
                 }
             }
         });
@@ -123,7 +130,7 @@ public class ShiPinActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 url = list.get(i).getUrl();
-                jCVideoPlayer.setUp(url, "小熊猫");
+                jCVideoPlayer.setUp("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096", "小熊猫");
             }
         });
     }
@@ -132,6 +139,15 @@ public class ShiPinActivity extends AppCompatActivity {
         fenxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UMImage umImage = new UMImage(ShiPinActivity.this, R.mipmap.abc);
+                UMWeb umWeb = new UMWeb("http://www.lrts.me/playlist");
+                umWeb.setTitle(Title);
+                umWeb.setThumb(umImage);
+                new ShareAction(ShiPinActivity.this)
+                        .setPlatform(SHARE_MEDIA.QQ)//传入平台
+                        .withMedia(umWeb)
+                        .setCallback(ShiPinActivity.this)//回调监听器
+                        .share();
 
             }
         });
@@ -147,5 +163,32 @@ public class ShiPinActivity extends AppCompatActivity {
                 Toast.makeText(ShiPinActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @Override
+    public void onStart(SHARE_MEDIA share_media) {
+
+    }
+
+    @Override
+    public void onResult(SHARE_MEDIA share_media) {
+
+    }
+
+    @Override
+    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+    }
+
+    @Override
+    public void onCancel(SHARE_MEDIA share_media) {
+
     }
 }
