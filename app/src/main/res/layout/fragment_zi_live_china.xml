@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cn.co.com.newpanda.view.fragment.ZiLiveChinaFragment">
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerView_live"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView_live"></android.support.v7.widget.RecyclerView>
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
 </FrameLayout>

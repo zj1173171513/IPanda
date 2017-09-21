@@ -14,10 +14,13 @@ public class ShuLiveChina {
     private Long id;
     @Property(nameInDb = "stitle")
     private String title;
-    @Generated(hash = 945641035)
-    public ShuLiveChina(Long id, String title) {
+    @Property(nameInDb = "surl")
+    private String url;
+    @Generated(hash = 764494238)
+    public ShuLiveChina(Long id, String title, String url) {
         this.id = id;
         this.title = title;
+        this.url = url;
     }
     @Generated(hash = 191026411)
     public ShuLiveChina() {
@@ -34,5 +37,11 @@ public class ShuLiveChina {
     public void setTitle(String title) {
         this.title = title;
     }
-    
+    public String getUrl() {
+        return this.url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }

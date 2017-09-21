@@ -1,4 +1,4 @@
-package cn.co.com.newpanda.adapter;
+package cn.co.com.newpanda.adapter.BillowingVideoadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
