@@ -105,7 +105,15 @@ public class LiveChina extends BaseFragment {
                         shuLiveChinaDao3.insert(shuLiveChina);
                     }
                 }
-
+                List<ShuLiveChina> listShu2 =  shuLiveChinaDao2.queryBuilder().list();
+                if (listShu2.size()==0){
+                    for (int i = 0; i < listalllistBeen.size(); i++) {
+                        String title = listalllistBeen.get(i).getTitle();
+                        ShuLiveChina shuLiveChina = new ShuLiveChina();
+                        shuLiveChina.setTitle(title);
+                        shuLiveChinaDao2.insert(shuLiveChina);
+                    }
+                }
                 List<ShuLiveChina> listShu1 = shuLiveChinaDao.queryBuilder().list();
                 if (listShu1.size()==0){
                     for (int i = 0; i < listtablistBeen.size(); i++) {
@@ -113,6 +121,8 @@ public class LiveChina extends BaseFragment {
                         ShuLiveChina shuLiveChina = new ShuLiveChina();
                         shuLiveChina.setTitle(title);
                         shuLiveChinaDao.insert(shuLiveChina);
+                        ShuLiveChina unique = shuLiveChinaDao2.queryBuilder().where(ShuLiveChinaDao.Properties.Title.eq(title)).build().unique();
+                        shuLiveChinaDao2.delete(unique);
                     }
                 }
                 List<ShuLiveChina> listShus1 = shuLiveChinaDao.queryBuilder().list();
@@ -127,15 +137,7 @@ public class LiveChina extends BaseFragment {
                 liveChinaStatePagerAdapter = new LiveChinaStatePagerAdapter(getActivity().getSupportFragmentManager(), listfrag,listdao);
                 tabChina.setupWithViewPager(pagerChina);
                 pagerChina.setAdapter(liveChinaStatePagerAdapter);
-                List<ShuLiveChina> listShu2 =  shuLiveChinaDao2.queryBuilder().list();
-                if (listShu2.size()==0){
-                    for (int i = 0; i < listalllistBeen.size(); i++) {
-                        String title = listalllistBeen.get(i).getTitle();
-                        ShuLiveChina shuLiveChina = new ShuLiveChina();
-                        shuLiveChina.setTitle(title);
-                        shuLiveChinaDao2.insert(shuLiveChina);
-                    }
-                }
+
 
             }
             @Override
