@@ -2,29 +2,38 @@ package cn.co.com.newpanda.view.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.Handler;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.co.com.newpanda.R;
 import cn.co.com.newpanda.adapter.BoBaoAdapter.MyRecycAdapter;
-import cn.co.com.newpanda.adapter.BoBaoAdapter.SimplePaddingDecoration;
 import cn.co.com.newpanda.app.App;
 import cn.co.com.newpanda.base.BaseFragment;
+import cn.co.com.newpanda.model.bobao.PBDCModelImpl;
 import cn.co.com.newpanda.model.entity.BoBaoBean.PandaBroadCastBean;
 import cn.co.com.newpanda.model.entity.BoBaoBean.PandaBroadcastInfoBean;
 import cn.co.com.newpanda.module.pandabroadcast.PandaBroadcastContract;
 import cn.co.com.newpanda.module.pandabroadcast.PandaBroadcastPresenter;
+import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
 import cn.co.com.newpanda.view.activity.BoBao.BoBaoActivity;
+import cn.co.com.newpanda.view.activity.BoBao.WebViewActivity;
 
 
 /**
@@ -34,15 +43,21 @@ import cn.co.com.newpanda.view.activity.BoBao.BoBaoActivity;
  * 跌在谷底,思人生
  */
 
-public class PandaBroadcast extends BaseFragment implements PandaBroadcastContract.View{
+public class PandaBroadcast extends BaseFragment implements PullToRefreshBase.OnLastItemVisibleListener,PandaBroadcastContract.View, PullToRefreshBase.OnRefreshListener<ListView>, AdapterView.OnItemClickListener {
     PandaBroadcastContract.Presenter presenter;
-    @BindView(R.id.image)
-    ImageView imagetu;
+    Unbinder unbinder;
     @BindView(R.id.recycler)
-    RecyclerView recycler;
-    @BindView(R.id.refreshLayout)
-    SwipeRefreshLayout refreshLayout;
+    PullToRefreshListView recycler;
+    Unbinder unbinder1;
+
     private ProgressDialog dialog;
+    private ImageView image1;
+    private View top;
+    private List<PandaBroadcastInfoBean.ListBean> list;
+    private ListView listView;
+    private View footer;
+    private ProgressBar moreBar;
+
     @Override
     protected int getLayoutId() {
         return R.layout.pandabroadcast_fragment;
@@ -50,7 +65,17 @@ public class PandaBroadcast extends BaseFragment implements PandaBroadcastContra
 
     @Override
     protected void init(View view) {
+        ButterKnife.bind(getActivity());
 
+        top = View.inflate(getActivity(), R.layout.item_top_broad, null);
+        image1 = top.findViewById(R.id.image);
+
+        footer = View.inflate(getActivity(), R.layout.item_footer_broad, null);
+        moreBar = footer.findViewById(R.id.moreBar);
+
+        recycler.setOnItemClickListener(this);
+        recycler.setOnRefreshListener(this);
+        recycler.setOnLastItemVisibleListener(this);
     }
 
     @Override
@@ -80,45 +105,136 @@ public class PandaBroadcast extends BaseFragment implements PandaBroadcastContra
 
     @Override
     public void dismissDialog() {
-
+        dialog.dismiss();
     }
 
     @Override
     public void setResult(final PandaBroadCastBean pdbcBean) {
         showProgressDialog();
-        String image = pdbcBean.getData().getBigImg().get(0).getImage();
-        Glide.with(App.context).load(image).into(imagetu);
-        imagetu.setOnClickListener(new View.OnClickListener() {
+        String imagew = pdbcBean.getData().getBigImg().get(0).getImage();
+        Glide.with(App.context).load(imagew).into(image1);
+        image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), BoBaoActivity.class);
-                intent.putExtra("title",pdbcBean.getData().getBigImg().get(0).getTitle());
-                intent.putExtra("pid",pdbcBean.getData().getBigImg().get(0).getPid());
-                Log.e("TAG",pdbcBean.getData().getBigImg().get(0).getPid());
+                Intent intent = new Intent(getActivity(), BoBaoActivity.class);
+                intent.putExtra("title", pdbcBean.getData().getBigImg().get(0).getTitle());
+                intent.putExtra("pid", pdbcBean.getData().getBigImg().get(0).getPid());
+                Log.e("TAG", pdbcBean.getData().getBigImg().get(0).getPid());
                 startActivity(intent);
             }
         });
     }
 
 
-
-
     @Override
     public void showMessage(String msg) {
-
+        Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setInfo(PandaBroadcastInfoBean pdbcInfoBean) {
         List<PandaBroadcastInfoBean.ListBean> list1 = pdbcInfoBean.getList();
-        List<PandaBroadcastInfoBean.ListBean> list = new ArrayList<PandaBroadcastInfoBean.ListBean>();
+        list = new ArrayList<PandaBroadcastInfoBean.ListBean>();
         list.addAll(list1);
-        MyRecycAdapter adapter  = new MyRecycAdapter(App.context,list);
-        LinearLayoutManager manager = new LinearLayoutManager(App.context);
-        recycler.addItemDecoration(new SimplePaddingDecoration(App.context));
-        recycler.setLayoutManager(manager);
+        MyRecycAdapter adapter = new MyRecycAdapter(App.context, list);
         recycler.setAdapter(adapter);
-        dialog.dismiss();
+        listView = recycler.getRefreshableView();
+
+        listView.addHeaderView(top);
+        listView.addFooterView(footer);
+
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra("name", list.get(i));
+        getActivity().startActivity(intent);
+
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+
+
+        String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(),
+                DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+
+        // 最后一次刷新的时间
+        refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("上次刷新时间   " + label);
+
+        //设置刷新图标 下拉的时候显示的内容
+        //refreshView.getLoadingLayoutProxy().setLoadingDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+
+        // 下拉完成后，还没有刷新时 显示的内容
+        // refreshView.getLoadingLayoutProxy().setReleaseLabel("默默地么么哒！！");
+
+        //松开手，正在刷新时 ，显示的内容
+        //     refreshView.getLoadingLayoutProxy().setRefreshingLabel("啦啦啦啦啦");
+
+        // Toast.makeText(getActivity(), "刷新了", Toast.LENGTH_SHORT).show();
+
+        recycler.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+
+        recycler.setRefreshing();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recycler.onRefreshComplete();
+            }
+        }, 2000);
+
+
+        /**
+         * 程序进来就执行刷新数据，自动执行刷新
+         */
+        recycler.setRefreshing();
+    }
+
+
+
+    @Override
+    public void onLastItemVisible() {
+        Toast.makeText(getActivity(), "向下向下看我看我", Toast.LENGTH_SHORT).show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                new PBDCModelImpl().getPDBCinfo(new MyNetWorkCallback<PandaBroadcastInfoBean>() {
+                    @Override
+                    public void onSuccess(PandaBroadcastInfoBean pandaBroadcastInfoBean) {
+                        List<PandaBroadcastInfoBean.ListBean> list1 = pandaBroadcastInfoBean.getList();
+
+
+                        list.addAll(list1);
+
+
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMsg) {
+
+                    }
+                });
+
+                moreBar.cancelLongPress();
+            }
+        }, 2000);
+//        recycler.setRefreshing();
+
     }
 }
 

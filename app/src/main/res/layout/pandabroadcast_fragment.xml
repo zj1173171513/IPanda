@@ -1,40 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/refreshLayout">
 
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@+id/main_srl"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:fadingEdge="vertical"
 
-        >
-
-        ·
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:scaleType="fitXY"
-                android:layout_marginTop="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/image"/>
-
-            <android.support.v7.widget.RecyclerView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
                 android:id="@+id/recycler"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
+                android:layout_height="match_parent"></com.handmark.pulltorefresh.library.PullToRefreshListView>
 
-
-    </ScrollView>
-</android.support.v4.widget.SwipeRefreshLayout>
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+</LinearLayout>

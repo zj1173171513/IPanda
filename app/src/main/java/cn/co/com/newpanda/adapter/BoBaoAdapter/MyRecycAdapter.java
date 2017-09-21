@@ -1,11 +1,9 @@
 package cn.co.com.newpanda.adapter.BoBaoAdapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,13 +13,12 @@ import java.util.List;
 
 import cn.co.com.newpanda.R;
 import cn.co.com.newpanda.model.entity.BoBaoBean.PandaBroadcastInfoBean;
-import cn.co.com.newpanda.view.activity.BoBao.WebViewActivity;
 
 /**
  * Created by Administrator on 2017/9/18.
  */
 
-public class MyRecycAdapter extends RecyclerView.Adapter<MyRecycAdapter.ViewHolder>{
+public class MyRecycAdapter extends BaseAdapter {
     private Context context;
     private List<PandaBroadcastInfoBean.ListBean> data;
 
@@ -30,50 +27,58 @@ public class MyRecycAdapter extends RecyclerView.Adapter<MyRecycAdapter.ViewHold
         this.data = data;
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemview = LayoutInflater.from(context).inflate(R.layout.item_pdbcinfo, parent, false);
 
-        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        itemview.setLayoutParams(layoutParams);
-        ViewHolder viewHolder = new ViewHolder(itemview);
-        return viewHolder;
-    }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        final PandaBroadcastInfoBean.ListBean mm = data.get(position);
-        holder.title.setText(mm.getTitle());
-        holder.time.setText(mm.getDatatype());
-        Glide.with(context).load(mm.getPicurl()).into(holder.image);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context, WebViewActivity.class);
-                intent.putExtra("name",data.get(position));
-                context.startActivity(intent);
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView title;
-        private TextView time;
-        private ImageView image;
-        //private   View   recycleItemview;
-        private View view;
-        public ViewHolder(View itemView) {
-            super(itemView);
-            view = itemView;
-            //recycleItemview=itemView;
-            title = (TextView) itemView.findViewById(R.id.tv_title);
-            time = (TextView) itemView.findViewById(R.id.tv_time);
-            image = (ImageView) itemView.findViewById(R.id.image);
+    @Override
+    public Object getItem(int i) {
+
+        return data.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        ViewHolder holder = null;
+        if (view == null) {
+            view = View.inflate(context, R.layout.item_pdbcinfo, null);
+            holder = new ViewHolder();
+            holder.image=(ImageView)view.findViewById(R.id.image);
+            holder.tv_time=(TextView)view.findViewById(R.id.tv_time);
+            holder.tv_title=(TextView)view.findViewById(R.id.tv_title);
+
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
+
+        final PandaBroadcastInfoBean.ListBean mm = data.get(i);
+        holder.tv_title.setText(mm.getTitle());
+        holder.tv_time.setText(mm.getDatatype());
+        Glide.with(context).load(mm.getPicurl()).into(holder.image);
+        return view;
+    }
+
+    public static class ViewHolder {
+        public View rootView;
+        public ImageView image;
+        public TextView tv_title;
+        public TextView tv_time;
+
+//        public ViewHolder(View rootView) {
+//            this.rootView = rootView;
+//            this.image=(ImageView)rootView.findViewById(R.id.image);
+//            this.tv_time=(TextView)rootView.findViewById(R.id.tv_time);
+//            this.tv_title=(TextView)rootView.findViewById(R.id.tv_title);
+//        }
+
     }
 }

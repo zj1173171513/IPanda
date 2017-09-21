@@ -33,6 +33,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     private void initView() {
         webview = (WebView) findViewById(R.id.webview);
+        webview.setInitialScale(39);
         activity_web_view2 = (RelativeLayout) findViewById(R.id.activity_web_view2);
         //方式1. 加载一个网页：
     }

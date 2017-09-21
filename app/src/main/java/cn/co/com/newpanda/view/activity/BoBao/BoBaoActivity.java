@@ -1,9 +1,12 @@
 package cn.co.com.newpanda.view.activity.BoBao;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,6 +31,8 @@ public class BoBaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_bo_bao);
         videoController = (JCVideoPlayer) findViewById(R.id.videocontroller1);
         initIntent();
@@ -65,6 +70,19 @@ public class BoBaoActivity extends AppCompatActivity {
         title = intent.getStringExtra("title");
 //        Log.e("TAG",pid);
         Toast.makeText(this, ""+ pid, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+
+        /**
+         * 设置为横屏
+         */
+        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+
+        super.onResume();
     }
 
 }
