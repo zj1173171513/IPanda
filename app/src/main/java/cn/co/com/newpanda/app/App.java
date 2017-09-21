@@ -3,6 +3,7 @@ package cn.co.com.newpanda.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -32,5 +33,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         UMShareAPI.get(this);
+        Config.DEBUG = true;
     }
 }

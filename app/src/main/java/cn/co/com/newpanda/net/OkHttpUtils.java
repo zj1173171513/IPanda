@@ -1,5 +1,7 @@
 package cn.co.com.newpanda.net;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -78,6 +80,7 @@ public class OkHttpUtils implements IHttp {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
+//                Log.e("TAG",e.toString());
                 App.context.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
