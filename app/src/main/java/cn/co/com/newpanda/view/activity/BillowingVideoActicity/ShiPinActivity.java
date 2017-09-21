@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,10 @@ import java.util.List;
 import cn.co.com.newpanda.R;
 import cn.co.com.newpanda.adapter.BillowingVideoadapter.BillowingbottomAdapter;
 import cn.co.com.newpanda.model.entity.BillowingVideoBean.BillowingItemBean;
+import cn.co.com.newpanda.model.entity.livechinaBean.ShuLiveChina;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.DaoMaster;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.DaoSession;
+import cn.co.com.newpanda.model.entity.livechinaBean.dao.ShuLiveChinaDao;
 import cn.co.com.newpanda.net.OkHttpUtils;
 import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -37,6 +42,9 @@ public class ShiPinActivity extends AppCompatActivity {
     private List<BillowingItemBean.VideoBean> list = new ArrayList<>();
     private String url;
     private String name;
+    private ImageView fenxiang;
+    private ImageView shoucang;
+    private String Title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +53,10 @@ public class ShiPinActivity extends AppCompatActivity {
 
 
         id = getIntent().getStringExtra("id");
+        Title = getIntent().getStringExtra("name");
         initView();
         initData();
+        initoperation();//对分享、收藏的操作
     }
 
 
@@ -55,6 +65,9 @@ public class ShiPinActivity extends AppCompatActivity {
         jCVideoPlayer.setUp("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096", "小爱熊猫");
         sanjiaohao = (ImageView) findViewById(R.id.butImg);
         textName = (TextView) findViewById(R.id.textName);
+
+        fenxiang = (ImageView) findViewById(R.id.mFenxiang);
+        shoucang = (ImageView) findViewById(R.id.mShoucang);
         shipinlistview = (ListView) findViewById(R.id.shipinlistview);
         shipinlistview.setVisibility(View.VISIBLE);
         textName.setVisibility(View.GONE);
@@ -111,6 +124,27 @@ public class ShiPinActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 url = list.get(i).getUrl();
                 jCVideoPlayer.setUp(url, "小熊猫");
+            }
+        });
+    }
+
+    private void initoperation() {
+        fenxiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        shoucang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(ShiPinActivity.this, "aaa.db");
+                DaoMaster daoMaster = new DaoMaster(helper.getReadableDb());
+                DaoSession daoSession = daoMaster.newSession();
+                ShuLiveChinaDao shuLiveChinaDao = daoSession.getShuLiveChinaDao();
+                ShuLiveChina shu = new ShuLiveChina(null, Title, null);
+                shuLiveChinaDao.insert(shu);
+                Toast.makeText(ShiPinActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -111,7 +111,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".view.activity.BillowingVideoActicity.toushipinActivity" />
         <activity android:name=".view.activity.landfallActivity" />
-        <activity android:name=".view.activity.settingActivity"></activity>
+        <activity android:name=".view.activity.settingActivity" />
+        <activity android:name=".view.activity.ShouCangActivity"></activity>
     </application>
 
 </manifest>
