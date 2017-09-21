@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -62,6 +61,7 @@ public class MuchliveFragment extends BaseFragment implements MyRecycleAdapter.O
         myRecyclerView.setLayoutManager(gridLayoutManager);
         myRecyclerView.addItemDecoration(new SpaceItemDecoration(spanCount, spacing, includeEdge));
         mAdapter = new MyRecycleAdapter(getActivity(), pandalist);
+        mAdapter.setOnItemClickListener(this);
         myRecyclerView.setAdapter(mAdapter);
 
         OkHttpUtils.getInstance().sendGet(HOMELIVE, new Callback() {
@@ -75,7 +75,6 @@ public class MuchliveFragment extends BaseFragment implements MyRecycleAdapter.O
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
-
                 // Log.e("aaaaa", json);
                 Gson gson = new Gson();
                 liveBean = gson.fromJson(json, PandaLiveBean.class);
@@ -101,12 +100,10 @@ public class MuchliveFragment extends BaseFragment implements MyRecycleAdapter.O
         return rootView;
     }
 
+
     @Override
-    public void click(int position) {
-//        Bundle bundle = new Bundle();
-//        bundle.putString("title",liveBean.getList().get(position).getTitle());
-//        bundle.putString("img",liveBean.getList().get(position).getImage());
-        Toast.makeText(getActivity(), "111111", Toast.LENGTH_SHORT).show();
+    public void click(View view, int adapterPosition) {
+        Bundle bundle = new Bundle();
 
     }
 
@@ -116,6 +113,5 @@ public class MuchliveFragment extends BaseFragment implements MyRecycleAdapter.O
         unbinder.unbind();
 
     }
-
 
 }

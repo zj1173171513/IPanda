@@ -50,20 +50,9 @@ public class DontLetTheMale extends BaseFragment implements DonModelContract.Vie
     @Override
     protected void loadData() {
         donPresnter.start();
-        onClickListener();
+
     }
 
-    private void onClickListener() {
-
-        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("WonderfulURL", donList.get(i).getVid());
-                startActivity(intent);
-            }
-        });
-    }
 
     @Override
     public void setPresenter(DonModelContract.DonPresnter donPresnter) {
@@ -86,6 +75,21 @@ public class DontLetTheMale extends BaseFragment implements DonModelContract.Vie
         donAdapter = new DonAdapter(App.context, R.layout.pandalive_list_item, donList);
         pandaLiveListView.setAdapter(donAdapter);
 
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", donList.get(i).getVid());
+                intent.putExtra("title", donList.get(i).getT());
+                intent.putExtra("data", donList.get(i).getPtime());
+                intent.putExtra("len", donList.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", donList.get(i).getImg());
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -104,10 +108,16 @@ public class DontLetTheMale extends BaseFragment implements DonModelContract.Vie
         return view;
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 }

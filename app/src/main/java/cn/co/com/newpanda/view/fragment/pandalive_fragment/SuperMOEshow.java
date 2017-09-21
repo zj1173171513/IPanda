@@ -51,17 +51,7 @@ public class SuperMOEshow extends BaseFragment implements SuperMOEshowContract.V
     @Override
     protected void loadData() {
         superPresenter.start();
-        onClickListener();
-    }
 
-    private void onClickListener() {
-       pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               Intent intent = new Intent(getContext(), VideoActivity.class);
-               intent.putExtra("ROLLURL", showLsit.get(i).getVid());
-           }
-       });
     }
 
     @Override
@@ -84,6 +74,21 @@ public class SuperMOEshow extends BaseFragment implements SuperMOEshowContract.V
         showLsit.addAll(superMOEshowBean.getVideo());
         superMOEshowAdapter = new SuperMOEshowAdapter(App.context,R.layout.pandalive_list_item,showLsit);
         pandaLiveListView.setAdapter(superMOEshowAdapter);
+
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", showLsit.get(i).getVid());
+                intent.putExtra("title", showLsit.get(i).getT());
+                intent.putExtra("data", showLsit.get(i).getPtime());
+                intent.putExtra("len", showLsit.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", showLsit.get(i).getImg());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

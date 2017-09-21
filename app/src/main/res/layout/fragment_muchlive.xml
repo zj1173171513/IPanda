@@ -6,8 +6,6 @@
     tools:context="cn.co.com.newpanda.view.fragment.pandalive_fragment.bottonlive_fragment.MuchliveFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:id="@+id/my_recycler_view"

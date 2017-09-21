@@ -141,6 +141,8 @@ public class PandaBroadCastBean {
                 this.order = order;
             }
         }
+
+
     }
 
 

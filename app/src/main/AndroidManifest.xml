@@ -35,7 +35,7 @@
     <application
         android:name=".app.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_ipnda"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -51,9 +51,12 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity android:name=".view.activity.BillowingVideoActicity.ShiPinActivity" />
+        <!--PandaLive视屏Activity-->
         <activity
             android:name=".view.activity.pandaliveActivity.VideoActivity"
+            android:configChanges="orientation"
             android:screenOrientation="portrait" />
+
         <activity android:name=".module.home.homeactivity.VideoActivity" />
         <activity android:name=".module.home.homeactivity.InteractionActivity" />
         <activity android:name=".module.home.homeactivity.WebViewActivity" />
