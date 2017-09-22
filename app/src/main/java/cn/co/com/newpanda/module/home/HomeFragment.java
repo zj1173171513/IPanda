@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import cn.co.com.newpanda.module.home.adapter.HomeAdapter;
 public class HomeFragment extends BaseFragment implements HomeContract.View {
     @BindView(R.id.swipe_refresh_widget)
     SwipeRefreshLayout swipeRefreshWidget;
+    @BindView(R.id.home_fragment_img)
+    ImageView homeFragmentImg;
     private ProgressDialog progressDialog;
     HomeContract.Presenter presenter;
     @BindView(R.id.home_recy)
@@ -40,6 +43,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void init(View view) {
+        presenter = new HomePresenter(this);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         homeRecy.setLayoutManager(manager);
@@ -62,7 +66,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     protected void loadData() {
 
         presenter.start();
-
+        homeFragmentImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "1111111111111111", Toast.LENGTH_SHORT).show();
+                presenter.start();
+                homeAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
@@ -84,11 +95,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             mList.add(data);
         }
         homeAdapter.notifyDataSetChanged();
+        homeRecy.setVisibility(View.VISIBLE);
+        homeFragmentImg.setVisibility(View.GONE);
     }
 
     @Override
     public void showMessage(String msg) {
         Toast.makeText(getContext(), "网络连接异常！", Toast.LENGTH_SHORT).show();
+        homeRecy.setVisibility(View.GONE);
+        homeFragmentImg.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -109,4 +124,5 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         super.onDestroyView();
         unbinder.unbind();
     }
+
 }

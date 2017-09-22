@@ -41,7 +41,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,18 +50,17 @@
         </activity>
         <activity
             android:name=".view.activity.TwoActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".view.activity.BillowingVideoActicity.ShiPinActivity" />
-        <!--PandaLive视屏Activity-->
+        <!-- PandaLive视屏Activity -->
         <activity
             android:name=".view.activity.pandaliveActivity.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".module.home.homeactivity.VideoActivity" />
+        <activity
+            android:name=".module.home.homeactivity.VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" />
         <activity android:name=".module.home.homeactivity.InteractionActivity" />
         <activity android:name=".module.home.homeactivity.WebViewActivity" />
         <activity android:name=".view.activity.PersonalActivity" />
@@ -109,7 +108,6 @@
             android:name="UMENG_APPKEY"
             android:value="561cae6ae0f55abd990035bf" />
 
-
         <activity android:name=".view.activity.BoBao.BoBaoActivity" />
         <activity
             android:name=".view.activity.BoBao.WebViewActivity"
@@ -117,8 +115,11 @@
         <activity android:name=".view.activity.BillowingVideoActicity.toushipinActivity" />
         <activity android:name=".view.activity.landfallActivity" />
         <activity android:name=".view.activity.settingActivity" />
-        <activity android:name=".view.activity.ShouCangActivity"></activity>
-        <activity android:name=".module.home.homeactivity.CctvActivity"></activity>
+        <activity android:name=".view.activity.ShouCangActivity" />
+        <activity android:name=".module.home.homeactivity.CctvActivity" />
+        <activity android:name=".module.home.homeactivity.HomeLiveActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

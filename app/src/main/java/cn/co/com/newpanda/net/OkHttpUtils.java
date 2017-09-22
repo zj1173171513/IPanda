@@ -1,8 +1,7 @@
 package cn.co.com.newpanda.net;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
+import com.umeng.socialize.utils.Log;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -80,12 +79,11 @@ public class OkHttpUtils implements IHttp {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-//                Log.e("TAG",e.toString());
+                Log.e("TAG",e.toString());
                 App.context.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //执行在主线程
-                        callback.onError(404, e.getMessage().toString());
+                        callback.onError(404, e.toString());
                     }
                 });
 

@@ -23,4 +23,5 @@ public interface AppService {
     public static final String HUA_WON = "http://api.cntv.cn/video/videolistById?n=6&vsid=C17604&p=1&serviceId=panda&em=2";
     public static final String ZHONG_WON = "http://api.cntv.cn/video/videolistById?n=6&vsid=C10471&p=1&serviceId=panda&em=1";
 
+    public static final String LIVE_URL="http://vdn.live.cntv.cn/api2/live.do?channel=pa://cctv_p2p_hd";
 }
