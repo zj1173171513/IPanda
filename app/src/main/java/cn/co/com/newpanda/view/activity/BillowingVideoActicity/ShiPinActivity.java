@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.co.com.newpanda.R;
-import cn.co.com.newpanda.adapter.BillowingVideoadapter.BillowingbottomAdapter;
+import cn.co.com.newpanda.adapter.BillowingVideoadapter.My2Adapter;
 import cn.co.com.newpanda.model.entity.BillowingVideoBean.BillowingItemBean;
 import cn.co.com.newpanda.model.entity.livechinaBean.ShuLiveChina;
 import cn.co.com.newpanda.model.entity.livechinaBean.dao.DaoMaster;
@@ -77,8 +77,9 @@ public class ShiPinActivity extends AppCompatActivity implements UMShareListener
         fenxiang = (ImageView) findViewById(R.id.mFenxiang);
         shoucang = (ImageView) findViewById(R.id.mShoucang);
         shipinlistview = (ListView) findViewById(R.id.shipinlistview);
-        shipinlistview.setVisibility(View.VISIBLE);
+
         textName.setVisibility(View.GONE);
+
         sanjiaohao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,11 +91,10 @@ public class ShiPinActivity extends AppCompatActivity implements UMShareListener
                                 textName.setText(name);
                                 textName.setVisibility(View.VISIBLE);
                                 break;
-                        /*    case 1:
+                            case 1:
                                 ABS = 0;
-                                textName.setText("隐藏");
                                 textName.setVisibility(View.GONE);
-                                break;*/
+                                break;
                         }
                         sanjiaohao.setImageResource(image[++count % image.length]);
                         break;
@@ -124,13 +124,14 @@ public class ShiPinActivity extends AppCompatActivity implements UMShareListener
             }
         });
 
-        final BillowingbottomAdapter billowingbottomAdapter = new BillowingbottomAdapter(this, R.layout.billowing_bottom_item, list);
-        shipinlistview.setAdapter(billowingbottomAdapter);
+        My2Adapter adapter = new My2Adapter(list, ShiPinActivity.this);
+        shipinlistview.setAdapter(adapter);
+        shipinlistview.setVisibility(View.VISIBLE);
         shipinlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                url = list.get(i).getUrl();
-                jCVideoPlayer.setUp("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096", "小熊猫");
+                String urs = list.get(i).getUrl();
+                jCVideoPlayer.setUp(urs, "视频");
             }
         });
     }
