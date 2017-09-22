@@ -42,10 +42,7 @@ public class LIveChinaRecyclerAdapter extends RecyclerView.Adapter<LIveChinaRecy
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(context).inflate(R.layout.livechina_item, null);
-
         MyHolder holder = new MyHolder(inflate);
-
-
         return holder;
     }
 

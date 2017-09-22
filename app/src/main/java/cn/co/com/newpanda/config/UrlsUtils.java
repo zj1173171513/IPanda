@@ -10,7 +10,7 @@ package cn.co.com.newpanda.config;
 public class UrlsUtils {
 
     //服务器地址
-    private static final String BASEURL = "http://www.ipanda.com/kehuduan/";
+    private static final String BASEURL = "http://www.ipanda.com/kehuduan/PAGE14501786751053212/index.json";
     //首页
     public static final String PANDAHOME = BASEURL + "PAGE14501749764071042/index.json";
     //熊猫直播
