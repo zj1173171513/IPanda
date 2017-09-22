@@ -33,7 +33,7 @@ public class VideoActivity extends AppCompatActivity implements VideoContract.Vi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
+
 //        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 //            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 //        }
@@ -43,7 +43,7 @@ public class VideoActivity extends AppCompatActivity implements VideoContract.Vi
 
         new VideoActivityPresenter(this);
         vid = getIntent().getStringExtra("vid");
-        position = getIntent().getIntExtra("position", 2);
+        //position = getIntent().getIntExtra("position");
         title = getIntent().getStringExtra("title");
         data = getIntent().getStringExtra("data");
         len = getIntent().getStringExtra("len");
@@ -51,10 +51,7 @@ public class VideoActivity extends AppCompatActivity implements VideoContract.Vi
         activityPresnter.start();
 
 
-
     }
-
-
 
 //    @Override
 //    public void onWindowFocusChanged(boolean hasFocus) {
@@ -92,7 +89,7 @@ public class VideoActivity extends AppCompatActivity implements VideoContract.Vi
         Log.e("cccccc", "++++++++++");
         urls = videoBeans.getVideo().getChapters().get(0).getUrl();
         img = videoBeans.getVideo().getChapters().get(0).getImage();
-        pandalivevideo.setUp(urls,title);
+        pandalivevideo.setUp(urls, title);
 
     }
 

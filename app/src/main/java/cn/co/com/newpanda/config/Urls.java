@@ -44,7 +44,7 @@ public class Urls {
 
     public static final String PANDAVOD = "http://vdn.apps.cntv.cn/api/getVideoInfoForCBox.do";
     //    熊猫直播 多视角直播
-    public static final String PANDALIVEMULTI = BASEURL + "PAGE14501769230331752/PAGE14501787896813312/index.json";
+    public static final String PANDALIVEMULTI = BASEURL + "http://www.ipanda.com/kehuduan/PAGE14501769230331752/PAGE14501787896813312/index.json";
     //所有的播放视频的地址
     public static final String PLAYVIDEO = "http://vdn.apps.cntv.cn/api/getVideoInfoForCBox.do";
     //登录

@@ -72,4 +72,6 @@ public class MyAdapter extends BaseAdapter {
         TextView content;
         TextView time;
     }
+
+
 }

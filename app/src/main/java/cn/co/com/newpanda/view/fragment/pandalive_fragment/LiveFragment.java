@@ -82,12 +82,22 @@ public class LiveFragment extends BaseFragment implements TabLayout.OnTabSelecte
 
     }
 
+
+/*
+pandaTitle.setText("[正在直播]" + pandaLiveBean.getLive().get(0).getTitle());
+zkName.setText(pandaLiveBean.getLive().get(0).getBrief());
+String videoUrl="http://ipanda.vtime.cntv.cloudcdn.net/live/ipandahls_/index.m3u8?AUTH=aWlpj1YkabVe7sjrBFGz4qTnHjUNVRbYCytsKFFHkxMIs48f8K6oQFzcJu9o+PGbza+plcak5wb265g/m/TD+g==";
+liveJCV.setUp(videoUrl,pandaLiveBean.getLive().get(0).getTitle(),true);
+Glide.with(App.mContext).load(pandaLiveBean.getLive().get(0).getImage()).into(liveJCV.ivThumb);
+ */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
-        pandaLiveJCVideo.setUp("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096", "");
+        String videoUrl="http://ipanda.vtime.cntv.cloudcdn.net/live/ipandahls_/index.m3u8?AUTH=aWlpj1YkabVe7sjrBFGz4qTnHjUNVRbYCytsKFFHkxMIs48f8K6oQFzcJu9o+PGbza+plcak5wb265g/m/TD+g==";
+        pandaLiveJCVideo.setUp(videoUrl, "");
 
         pandaZK.setOnClickListener(new View.OnClickListener() {
             @Override
