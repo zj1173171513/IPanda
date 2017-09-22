@@ -23,6 +23,15 @@ public class App extends Application {
     public static Context mContext;
     public static int PAGER =1;
 
+    public static Context getContext() {
+        return context;
+    }
+    {
+
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setSinaWeibo("906063583", "003aade4244b070ff9e26b9dec446894", "http://sns.whalecloud.com");
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -31,24 +40,10 @@ public class App extends Application {
         QueuedWork.isUseThreadPool = false;
 
         UMShareAPI.get(this);
-        Config.DEBUG =true;
-//分享平台
-        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        PlatformConfig.setSinaWeibo("3921700954", "9c29cc8bc30f5edc087bde312ef083a1","http://sns.whalecloud.com");
-
-
-        mContext =getApplicationContext();
+        Config.DEBUG = true;
     }
 
 
 
-    /**
-     * 获取全局的Context
-     * @return
-     */
-    public static Context getContext(){
-        return context;
-    }
 
 }
