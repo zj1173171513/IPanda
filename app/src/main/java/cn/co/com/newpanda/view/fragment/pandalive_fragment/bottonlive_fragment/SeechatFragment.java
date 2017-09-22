@@ -44,6 +44,18 @@ public class SeechatFragment extends BaseFragment {
         seechatRecycle.setLayoutManager(layoutManager);
         muchliveAdapter = new MuchliveAdapter();
         seechatRecycle.setAdapter(muchliveAdapter);
+//        OkHttpUtils.getInstance().sendGet(PAGELIST, new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String muchList = response.body().string();
+//
+//            }
+//        });
 
     }
 

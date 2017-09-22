@@ -40,7 +40,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void init(View view) {
-        swipeRefreshWidget.setRefreshing(false);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         homeRecy.setLayoutManager(manager);
@@ -51,7 +50,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mList.clear();
                 presenter.start();
                 homeAdapter.notifyDataSetChanged();
                 swipeRefreshWidget.setRefreshing(false);
@@ -80,6 +78,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void setResult(HomeBean homeBean) {
+        mList.clear();
         HomeBean.DataBean data = homeBean.getData();
         for (int i = 0; i < 9; i++) {
             mList.add(data);
@@ -89,7 +88,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void showMessage(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "网络连接异常！", Toast.LENGTH_SHORT).show();
     }
 
     @Override

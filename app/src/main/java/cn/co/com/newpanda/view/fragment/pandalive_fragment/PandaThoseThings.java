@@ -49,19 +49,8 @@ public class PandaThoseThings extends BaseFragment implements ThingsContract.Vie
     @Override
     protected void loadData() {
         thingsPresenter.start();
-        onClickListener();
     }
 
-    private void onClickListener() {
-        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("WonderfulURL", thingsList.get(i).getVid());
-                startActivity(intent);
-            }
-        });
-    }
 
     @Override
     public void setPresenter(ThingsContract.ThingsPresenter thingsPresenter) {
@@ -84,8 +73,21 @@ public class PandaThoseThings extends BaseFragment implements ThingsContract.Vie
         thingsList.addAll(thingsBean.getVideo());
         thingsAdapter = new ThingsAdapter(App.context, R.layout.pandalive_list_item, thingsList);
         pandaLiveListView.setAdapter(thingsAdapter);
-//        Log.e("TAG",thingsBean.getVideo().get(0).getT());
-//        Log.e("TAG",thingsList.size()+"");
+
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", thingsList.get(i).getVid());
+                intent.putExtra("title", thingsList.get(i).getT());
+                intent.putExtra("data", thingsList.get(i).getPtime());
+                intent.putExtra("len", thingsList.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", thingsList.get(i).getImg());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

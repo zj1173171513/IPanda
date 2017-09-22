@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:background="#ffffff"
+    android:id="@+id/pd_list_item_button">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="80dp">
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:id="@+id/pd_list_item_img"/>
+        <ImageView
+            android:id="@+id/pd_list_item_two_img"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/pd_list_item_img"
+            android:src="@drawable/default_time_view" />
+
+        <ImageView
+            android:id="@+id/pd_list_item_three_img"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignLeft="@id/pd_list_item_img"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/play" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/pd_list_item_three_img"
+            android:layout_alignBottom="@id/pd_list_item_three_img"
+            android:id="@+id/pd_list_item_videoLength"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pd_list_item_title"/>
+    </RelativeLayout>
+</LinearLayout>

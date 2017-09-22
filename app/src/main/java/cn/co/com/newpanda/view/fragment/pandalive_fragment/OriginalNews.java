@@ -49,19 +49,8 @@ public class OriginalNews extends BaseFragment implements NewsContract.View {
     @Override
     protected void loadData() {
         newsPresnter.start();
-        onClickListener();
+    }
 
-    }
-    private void onClickListener() {
-        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("WonderfulURL", newsList.get(i).getVid());
-                startActivity(intent);
-            }
-        });
-    }
 
     @Override
     public void showProgressDialog() {
@@ -78,6 +67,21 @@ public class OriginalNews extends BaseFragment implements NewsContract.View {
         newsList.addAll(newsBean.getVideo());
         newsAdapter = new NewsAdapter(App.context,R.layout.pandalive_list_item,newsList);
         pandaLiveListView.setAdapter(newsAdapter);
+
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", newsList.get(i).getVid());
+                intent.putExtra("title", newsList.get(i).getT());
+                intent.putExtra("data", newsList.get(i).getPtime());
+                intent.putExtra("len", newsList.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", newsList.get(i).getImg());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

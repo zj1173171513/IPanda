@@ -46,6 +46,12 @@ public class PersonalActivity extends AppCompatActivity {
                 startActivity(new Intent(PersonalActivity.this, settingActivity.class));
             }
         });
+        personal_collect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PersonalActivity.this, ShouCangActivity.class));
+            }
+        });
 
 
     }

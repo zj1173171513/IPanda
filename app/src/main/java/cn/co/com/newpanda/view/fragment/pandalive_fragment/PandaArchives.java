@@ -52,18 +52,9 @@ public class PandaArchives extends BaseFragment implements PandaArchivesModeCont
     @Override
     protected void loadData() {
         pandaArchivesPresenter.start();
-        onClickListener();
+
     }
-    private void onClickListener() {
-        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("WonderfulURL", pandaArchList.get(i).getVid());
-                startActivity(intent);
-            }
-        });
-    }
+
     @Override
     public void setPresenter(PandaArchivesModeContract.PandaArchivesPresenter pandaArchivesPresenter) {
         this.pandaArchivesPresenter = pandaArchivesPresenter;
@@ -82,8 +73,23 @@ public class PandaArchives extends BaseFragment implements PandaArchivesModeCont
     @Override
     public void setResult(PandaArchivesBean pandaArchivesBean) {
         pandaArchList.addAll(pandaArchivesBean.getVideo());
-        pandaArchivesAdapter = new PandaArchivesAdapter(App.context,R.layout.pandalive_list_item,pandaArchList);
+        pandaArchivesAdapter = new PandaArchivesAdapter(App.context, R.layout.pandalive_list_item, pandaArchList);
         pandaLiveListView.setAdapter(pandaArchivesAdapter);
+
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", pandaArchList.get(i).getVid());
+                intent.putExtra("title", pandaArchList.get(i).getT());
+                intent.putExtra("data", pandaArchList.get(i).getPtime());
+                intent.putExtra("len", pandaArchList.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", pandaArchList.get(i).getImg());
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -94,7 +100,6 @@ public class PandaArchives extends BaseFragment implements PandaArchivesModeCont
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,7 +108,6 @@ public class PandaArchives extends BaseFragment implements PandaArchivesModeCont
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
-
 
 
     @Override

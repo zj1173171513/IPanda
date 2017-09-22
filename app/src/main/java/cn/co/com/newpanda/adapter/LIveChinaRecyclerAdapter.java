@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import cn.co.com.newpanda.R;
@@ -22,6 +24,15 @@ public class LIveChinaRecyclerAdapter extends RecyclerView.Adapter<LIveChinaRecy
 
     private Context context;
     private List<ZiLiveChinaBean.LiveBean> listliveBeen;
+//    private String hls1;
+//    private List<String> listshi;
+
+//    public LIveChinaRecyclerAdapter(Context context, List<ZiLiveChinaBean.LiveBean> listliveBeen,List<String> listshi) {
+//        this.context = context;
+//        this.listliveBeen = listliveBeen;
+//        this.listshi = listshi;
+//    }
+
 
     public LIveChinaRecyclerAdapter(Context context, List<ZiLiveChinaBean.LiveBean> listliveBeen) {
         this.context = context;
@@ -40,7 +51,28 @@ public class LIveChinaRecyclerAdapter extends RecyclerView.Adapter<LIveChinaRecy
 
     @Override
     public void onBindViewHolder(final MyHolder holder, final int position) {
-        holder.jcVideoPlayer.setUp("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096", " ");
+
+//        String id = listliveBeen.get(position).getId();
+//        String urls = "http://vdn.live.cntv.cn/api2/live.do?channel=pa://cctv_p2p_hd"+id+"&amp;client=androidapp\n";
+//        OkHttpUtils.getInstance().get(urls, null, new MyNetWorkCallback<LiveChinaShiPin.HlsUrlBean>() {
+//            @Override
+//            public void onSuccess(LiveChinaShiPin.HlsUrlBean hlsUrlBean) {
+//                String hls2 = hlsUrlBean.getHls2();
+//
+//                holder.jcVideoPlayer.setUp(hls2, " ");
+//            }
+//
+//            @Override
+//            public void onError(int errorCode, String errorMsg) {
+//
+//            }
+//        });
+        String s = "http://3811.liveplay.myqcloud.com/live/m3u8/3811_channel1099.m3u8?AUTH=5f6lFq/Fi2FNo4uGza4oNt4QDI5GJ2lzMQ5yrClqK9XfIRgenWkYrsQKLYN1xVw8MZhTVbJZJ7uhlNU2aEOZqg==";
+        Glide.with(context).load(listliveBeen.get(position).getImage()).into(holder.jcVideoPlayer.ivThumb);
+//        if(listshi!=null && listshi.size()>0){
+//            holder.jcVideoPlayer.setUp(s, "");
+//        }
+        holder.jcVideoPlayer.setUp(s, "");
         holder.lc_name.setText(listliveBeen.get(position).getTitle());
         holder.lc_info.setText(listliveBeen.get(position).getBrief());
         holder.lc_info.setVisibility(View.GONE);

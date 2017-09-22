@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chanven.lib.cptr.recyclerview.RecyclerAdapterWithHF;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -20,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.co.com.newpanda.R;
 import cn.co.com.newpanda.adapter.pandalive_adapter.bottonlive_adapter.MyRecycleAdapter;
+import cn.co.com.newpanda.adapter.pandalive_adapter.bottonlive_adapter.SpaceItemDecoration;
 import cn.co.com.newpanda.base.BaseFragment;
 import cn.co.com.newpanda.model.entity.PandaLiveBean;
 import cn.co.com.newpanda.net.OkHttpUtils;
@@ -32,7 +32,7 @@ import static cn.co.com.newpanda.config.UrlsUtils.HOMELIVE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MuchliveFragment extends BaseFragment {
+public class MuchliveFragment extends BaseFragment implements MyRecycleAdapter.OnItemClickListener {
 
     @BindView(R.id.my_recycler_view)
     RecyclerView myRecyclerView;
@@ -40,6 +40,10 @@ public class MuchliveFragment extends BaseFragment {
     private GridLayoutManager gridLayoutManager;
     private MyRecycleAdapter mAdapter;
     private ArrayList<PandaLiveBean.ListBean> pandalist = new ArrayList<>();
+    private PandaLiveBean liveBean;
+    int spanCount = 3; // 3 columns
+    int spacing = 35; // 50px
+    boolean includeEdge = false;
 
     @Override
     protected int getLayoutId() {
@@ -55,19 +59,14 @@ public class MuchliveFragment extends BaseFragment {
     protected void loadData() {
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         myRecyclerView.setLayoutManager(gridLayoutManager);
-        myRecyclerView.setHasFixedSize(true);
+        myRecyclerView.addItemDecoration(new SpaceItemDecoration(spanCount, spacing, includeEdge));
         mAdapter = new MyRecycleAdapter(getActivity(), pandalist);
-        RecyclerAdapterWithHF withHF = new RecyclerAdapterWithHF(mAdapter);
-        myRecyclerView.setAdapter(withHF);
-        withHF.setOnItemClickListener(new RecyclerAdapterWithHF.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerAdapterWithHF adapter, RecyclerView.ViewHolder vh, int position) {
-
-            }
-        });
+        mAdapter.setOnItemClickListener(this);
         myRecyclerView.setAdapter(mAdapter);
 
         OkHttpUtils.getInstance().sendGet(HOMELIVE, new Callback() {
+
+
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -76,10 +75,9 @@ public class MuchliveFragment extends BaseFragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
-
-               // Log.e("aaaaa", json);
+                // Log.e("aaaaa", json);
                 Gson gson = new Gson();
-                PandaLiveBean liveBean = gson.fromJson(json, PandaLiveBean.class);
+                liveBean = gson.fromJson(json, PandaLiveBean.class);
                 pandalist.addAll(liveBean.getList());
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -100,6 +98,13 @@ public class MuchliveFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+
+    @Override
+    public void click(View view, int adapterPosition) {
+        Bundle bundle = new Bundle();
+
     }
 
     @Override

@@ -51,18 +51,9 @@ public class Special extends BaseFragment implements SpecialContract.View {
     @Override
     protected void loadData() {
         specialPresnter.start();
-        onClickListener();
+
     }
-    private void onClickListener() {
-        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("WonderfulURL", specialList.get(i).getVid());
-                startActivity(intent);
-            }
-        });
-    }
+
     @Override
     public void setPresenter(SpecialContract.SpecialPresnter specialPresnter) {
         this.specialPresnter = specialPresnter;
@@ -83,6 +74,21 @@ public class Special extends BaseFragment implements SpecialContract.View {
         specialList.addAll(specialBean.getVideo());
         specialAdapter = new SpecialAdapter(App.context,R.layout.pandalive_list_item,specialList);
         pandaLiveListView.setAdapter(specialAdapter);
+
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", specialList.get(i).getVid());
+                intent.putExtra("title", specialList.get(i).getT());
+                intent.putExtra("data", specialList.get(i).getPtime());
+                intent.putExtra("len", specialList.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", specialList.get(i).getImg());
+                startActivity(intent);
+            }
+        });
 
     }
 

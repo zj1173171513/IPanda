@@ -1,6 +1,7 @@
 package cn.co.com.newpanda.module.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.co.com.newpanda.R;
+import cn.co.com.newpanda.app.AppService;
 import cn.co.com.newpanda.model.entity.homeBean.CctvBean;
+import cn.co.com.newpanda.module.home.homeactivity.CctvActivity;
 
 /**
  * Created by ASUS on 2017/9/15.
@@ -46,11 +49,28 @@ class CctvAdapter extends RecyclerView.Adapter<CctvAdapter.ViewHolder> {
         holder.cctvItemItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "此处没有pid", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context,VideoActivity.class);
-//                intent.putExtra("url",list.get(position).getPid());
-//                intent.putExtra("title",list.get(position).getTitle());
-//                context.startActivity(intent);
+//                Toast.makeText(context, "此处没有pid", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context,CctvActivity.class);
+                if (position == 0){
+                    intent.putExtra("cctv", AppService.GUO_URL);
+                    intent.putExtra("won",AppService.GUO_WON);
+                    intent.putExtra("position",position);
+                } else if (position == 1) {
+                    intent.putExtra("cctv",AppService.ZOU_URL);
+                    intent.putExtra("won",AppService.ZOU_WON);
+                    intent.putExtra("position",position);
+                } else if (position == 2) {
+                    intent.putExtra("cctv",AppService.HUA_URL);
+                    intent.putExtra("won",AppService.HUA_WON);
+                    intent.putExtra("position",position);
+                }else if (position == 3){
+                    intent.putExtra("cctv",AppService.ZHONG_URL);
+                    intent.putExtra("won",AppService.ZHONG_WON);
+                    intent.putExtra("position",position);
+                }else {
+                    Toast.makeText(context, "跑偏了跑偏了！", Toast.LENGTH_SHORT).show();
+                }
+                context.startActivity(intent);
             }
         });
     }

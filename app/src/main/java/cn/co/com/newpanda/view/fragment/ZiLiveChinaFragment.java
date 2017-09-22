@@ -36,11 +36,12 @@ public class ZiLiveChinaFragment extends BaseFragment {
     Unbinder unbinder;
     @BindView(R.id.recyclerView_live)
     XRecyclerView recyclerViewLive;
-    private List<ZiLiveChinaBean.LiveBean> listliveBeen = new ArrayList<>();
+    private List<ZiLiveChinaBean.LiveBean> listliveBeen ;
     private int times;
     private int refreshTime;
     private LIveChinaRecyclerAdapter lIveChinaRecyclerAdapter;
     private String url;
+    private List<String> listshi = new ArrayList<>();
 
     public ZiLiveChinaFragment(String url) {
        this.url = url;
@@ -56,10 +57,33 @@ public class ZiLiveChinaFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
+        listliveBeen = new ArrayList<>();
         OkHttpUtils.getInstance().get(url, null,  new MyNetWorkCallback<ZiLiveChinaBean>() {
+
             @Override
             public void onSuccess(final ZiLiveChinaBean ziLiveChinaBean) {
                 listliveBeen.addAll(ziLiveChinaBean.getLive());
+
+//                for (int i = 0; i < listliveBeen.size(); i++){
+//                    String id = listliveBeen.get(i).getId();
+//                    String urls = "http://vdn.live.cntv.cn/api2/live.do?channel=pa://cctv_p2p_hd"+id+"&amp;client=androidapp";
+//                    OkHttpUtils.getInstance().get(urls, null, new MyNetWorkCallback<LiveChinaShiPin.HlsUrlBean>() {
+//                        @Override
+//                        public void onSuccess(LiveChinaShiPin.HlsUrlBean hlsUrlBean) {
+//                            String hls1 = hlsUrlBean.getHls1();
+//                            listshi.add(hls1);
+//                            lIveChinaRecyclerAdapter.notifyDataSetChanged();
+//                        }
+//                        @Override
+//                        public void onError(int errorCode, String errorMsg) {
+//
+//                        }
+//                    });
+//                }
+
+
+
+
                 recyclerViewLive.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
                 //关闭上拉加载
                 recyclerViewLive.setLoadingMoreEnabled(false);

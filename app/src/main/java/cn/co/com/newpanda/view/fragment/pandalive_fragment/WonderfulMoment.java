@@ -30,7 +30,6 @@ import cn.co.com.newpanda.view.activity.pandaliveActivity.VideoActivity;
  */
 public class WonderfulMoment extends BaseFragment implements WonderfulMomentContract.View {
 
-    String url = "http://www.ipanda.com/kehuduan/video/index.json";
     @BindView(R.id.pandaLiveListView)
     ListView pandaLiveListView;
     Unbinder unbinder;
@@ -53,19 +52,7 @@ public class WonderfulMoment extends BaseFragment implements WonderfulMomentCont
     protected void loadData() {
         pandaLiveList = new ArrayList<>();
         presenter.start();
-        onClickListener();
     }
-    private void onClickListener() {
-        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("WonderfulURL", pandaLiveList.get(i).getVid());
-                startActivity(intent);
-            }
-        });
-    }
-
 
 
     @Override
@@ -92,7 +79,21 @@ public class WonderfulMoment extends BaseFragment implements WonderfulMomentCont
         wonderFuAdapter = new WonderFuAdapter(App.context, R.layout.pandalive_list_item, pandaLiveList);
         pandaLiveListView.setAdapter(wonderFuAdapter);
 
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", pandaLiveList.get(i).getVid());
+                intent.putExtra("title", pandaLiveList.get(i).getT());
+                intent.putExtra("data", pandaLiveList.get(i).getPtime());
+                intent.putExtra("len", pandaLiveList.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", pandaLiveList.get(i).getImg());
+                startActivity(intent);
 
+            }
+        });
     }
 
 
@@ -112,9 +113,10 @@ public class WonderfulMoment extends BaseFragment implements WonderfulMomentCont
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         unbinder.unbind();
     }
+
 
 }

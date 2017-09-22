@@ -48,18 +48,9 @@ public class PandaTopList extends BaseFragment implements TopContract.View {
     @Override
     protected void loadData() {
         topPresnter.start();
-        onClickListener();
+
     }
-    private void onClickListener() {
-        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("WonderfulURL", topList.get(i).getVid());
-                startActivity(intent);
-            }
-        });
-    }
+
     @Override
     public void setPresenter(TopContract.TopPresnter topPresnter) {
         this.topPresnter = topPresnter;
@@ -79,6 +70,21 @@ public class PandaTopList extends BaseFragment implements TopContract.View {
         topList.addAll(topBean.getVideo());
         topAdapter = new TopAdapter(App.context,R.layout.pandalive_list_item,topList);
         pandaLiveListView.setAdapter(topAdapter);
+
+        pandaLiveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(App.context, VideoActivity.class);
+                intent.putExtra("position",i);
+                intent.putExtra("vid", topList.get(i).getVid());
+                intent.putExtra("title", topList.get(i).getT());
+                intent.putExtra("data", topList.get(i).getPtime());
+                intent.putExtra("len", topList.get(i).getLen());
+                //Log.e("aaaaaa",pandaLiveList.get(i).getVid());
+                intent.putExtra("urlIg", topList.get(i).getImg());
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -64,6 +64,8 @@ public class VideoActivity extends AppCompatActivity implements IGetView<Video_B
             @Override
             public void run() {
                 pandalivevideo.setUp(url, title);
+                pandalivevideo.setFocusable(false);
+                pandalivevideo.ivStart.performClick();
             }
         });
     }

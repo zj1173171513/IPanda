@@ -89,6 +89,7 @@ public class BillowingVideo extends BaseFragment implements HomeContract.View {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getContext(), ShiPinActivity.class);
                 intent.putExtra("id", listBeen.get(i - 1).getId());
+                intent.putExtra("name", listBeen.get(i - 1).getTitle());
                 startActivity(intent);
             }
         });

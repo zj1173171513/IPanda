@@ -29,6 +29,7 @@ public class TopModelPresnter implements TopContract.TopPresnter {
             @Override
             public void onSuccess(TopBean topBean) {
                 topContractView.setResult(topBean);
+
             }
 
             @Override
