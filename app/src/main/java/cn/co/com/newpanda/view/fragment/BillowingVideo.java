@@ -1,5 +1,6 @@
 package cn.co.com.newpanda.view.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,6 +42,7 @@ public class BillowingVideo extends BaseFragment implements HomeContract.View {
     private TextView addTitle;
     private List<BillowingVideolistBean.ListBean> listBeen = new ArrayList<>();
     private String pid;
+    private ProgressDialog dialog;
 
     @Override
     protected int getLayoutId() {
@@ -50,6 +52,8 @@ public class BillowingVideo extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void init(View view) {
+        dialog = new ProgressDialog(getActivity());
+        dialog.show();
         liListview = view.findViewById(R.id.li_listView);
 
         liListview.addHeaderView(View.inflate(App.context, R.layout.imglayout, null));
@@ -60,6 +64,8 @@ public class BillowingVideo extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void loadData() {
+
+        dialog.dismiss();
         OkHttpUtils.getInstance().get(url, null, new MyNetWorkCallback<BillowingVideolistBean>() {
 
             private String image;
@@ -77,9 +83,10 @@ public class BillowingVideo extends BaseFragment implements HomeContract.View {
 
             @Override
             public void onError(int errorCode, String errorMsg) {
-                Toast.makeText(getContext(), "您可能没网了", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "请检查您的网络……", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         MyAdapter adapter = new MyAdapter(listBeen, getContext());
         liListview.setAdapter(adapter);
@@ -116,7 +123,7 @@ public class BillowingVideo extends BaseFragment implements HomeContract.View {
 
     @Override
     public void dismissDialog() {
-
+        dialog.dismiss();
     }
 
     @Override

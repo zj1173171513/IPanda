@@ -8,8 +8,7 @@
         android:id="@+id/addImg"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/addTitle"
@@ -18,7 +17,6 @@
         android:layout_alignBottom="@+id/addImg"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="15151"
         android:textColor="@color/color_text_normal"
         android:textSize="20sp"
         android:textStyle="bold" />
