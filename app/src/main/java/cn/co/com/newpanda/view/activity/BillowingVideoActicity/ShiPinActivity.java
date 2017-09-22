@@ -140,7 +140,7 @@ public class ShiPinActivity extends AppCompatActivity implements UMShareListener
             @Override
             public void onClick(View view) {
                 UMImage umImage = new UMImage(ShiPinActivity.this, R.mipmap.abc);
-                UMWeb umWeb = new UMWeb("http://www.lrts.me/playlist");
+                UMWeb umWeb = new UMWeb("http://asp.cntv.lxdns.com/asp/hls/main/0303000a/3/default/b258dc46dd0044f9a66ab99345412822/main.m3u8?maxbr=4096");
                 umWeb.setTitle(Title);
                 umWeb.setThumb(umImage);
                 new ShareAction(ShiPinActivity.this)
