@@ -1,11 +1,11 @@
 package cn.co.com.newpanda.view.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +30,7 @@ import cn.co.com.newpanda.model.entity.livechinaBean.dao.ShuLiveChinaDao;
 import cn.co.com.newpanda.module.liveChina.LiveChinaPapupWindow;
 import cn.co.com.newpanda.net.OkHttpUtils;
 import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
+import cn.co.com.newpanda.view.pager.NoScrollViewPager;
 
 import static cn.co.com.newpanda.app.App.context;
 import static cn.co.com.newpanda.config.Urls.LIVECHINA;
@@ -47,9 +48,9 @@ public class LiveChina extends BaseFragment {
     TabLayout tabChina;
     @BindView(R.id.live_china_img)
     ImageView img;
-    @BindView(R.id.pager_china)
-    ViewPager pagerChina;
     Unbinder unbinder;
+    @BindView(R.id.pager_china)
+    NoScrollViewPager pagerChina;
     private LiveChinaPapupWindow liveChinaPapupWindow;
 
     private List<LiVeChinaBean.AlllistBean> listalllistBeen = new ArrayList<>();
@@ -58,11 +59,11 @@ public class LiveChina extends BaseFragment {
     private ShuLiveChinaDao shuLiveChinaDao;
     private List<ShuLiveChina> listdao = new ArrayList<>();
     private LiveChinaStatePagerAdapter liveChinaStatePagerAdapter;
-    private Handler handler= new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
                     liveChinaStatePagerAdapter.notifyDataSetChanged();
                     break;
@@ -71,6 +72,7 @@ public class LiveChina extends BaseFragment {
     };
     private ShuLiveChinaDao shuLiveChinaDao2;
     private ShuLiveChinaDao shuLiveChinaDao3;
+    private ProgressDialog progressDialog;
 
     @Override
     protected int getLayoutId() {
@@ -84,6 +86,8 @@ public class LiveChina extends BaseFragment {
 
     @Override
     protected void loadData() {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.show();
         initDao();
         //请求
         OkHttpUtils.getInstance().get(LIVECHINA, null, new MyNetWorkCallback<LiVeChinaBean>() {
@@ -94,8 +98,8 @@ public class LiveChina extends BaseFragment {
             public void onSuccess(LiVeChinaBean liVeChinaBean) {
                 listalllistBeen.addAll(liVeChinaBean.getAlllist());
                 listtablistBeen.addAll(liVeChinaBean.getTablist());
-                List<ShuLiveChina> listShu3 =  shuLiveChinaDao3.queryBuilder().list();
-                if (listShu3.size()==0){
+                List<ShuLiveChina> listShu3 = shuLiveChinaDao3.queryBuilder().list();
+                if (listShu3.size() == 0) {
                     for (int i = 0; i < listalllistBeen.size(); i++) {
                         String title = listalllistBeen.get(i).getTitle();
                         String url = listalllistBeen.get(i).getUrl();
@@ -105,8 +109,8 @@ public class LiveChina extends BaseFragment {
                         shuLiveChinaDao3.insert(shuLiveChina);
                     }
                 }
-                List<ShuLiveChina> listShu2 =  shuLiveChinaDao2.queryBuilder().list();
-                if (listShu2.size()==0){
+                List<ShuLiveChina> listShu2 = shuLiveChinaDao2.queryBuilder().list();
+                if (listShu2.size() == 0) {
                     for (int i = 0; i < listalllistBeen.size(); i++) {
                         String title = listalllistBeen.get(i).getTitle();
                         ShuLiveChina shuLiveChina = new ShuLiveChina();
@@ -115,7 +119,7 @@ public class LiveChina extends BaseFragment {
                     }
                 }
                 List<ShuLiveChina> listShu1 = shuLiveChinaDao.queryBuilder().list();
-                if (listShu1.size()==0){
+                if (listShu1.size() == 0) {
                     for (int i = 0; i < listtablistBeen.size(); i++) {
                         String title = listtablistBeen.get(i).getTitle();
                         ShuLiveChina shuLiveChina = new ShuLiveChina();
@@ -134,12 +138,14 @@ public class LiveChina extends BaseFragment {
                     String url = unique.getUrl();
                     listfrag.add(new ZiLiveChinaFragment(url));
                 }
-                liveChinaStatePagerAdapter = new LiveChinaStatePagerAdapter(getActivity().getSupportFragmentManager(), listfrag,listdao);
+                liveChinaStatePagerAdapter = new LiveChinaStatePagerAdapter(getActivity().getSupportFragmentManager(), listfrag, listdao);
                 tabChina.setupWithViewPager(pagerChina);
                 pagerChina.setAdapter(liveChinaStatePagerAdapter);
+                progressDialog.dismiss();
 
 
             }
+
             @Override
             public void onError(int errorCode, String errorMsg) {
 
@@ -178,22 +184,20 @@ public class LiveChina extends BaseFragment {
         });
 
 
-
-
     }
 
     private void initDao() {
-        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context,"livechina.db");
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, "livechina.db");
         DaoMaster daoMaster = new DaoMaster(devOpenHelper.getReadableDb());
         DaoSession daoSession = daoMaster.newSession();
         shuLiveChinaDao = daoSession.getShuLiveChinaDao();
 
-        DaoMaster.DevOpenHelper devOpenHelper2 = new DaoMaster.DevOpenHelper(context,"livechina2.db");
+        DaoMaster.DevOpenHelper devOpenHelper2 = new DaoMaster.DevOpenHelper(context, "livechina2.db");
         DaoMaster daoMaster2 = new DaoMaster(devOpenHelper2.getReadableDb());
         DaoSession daoSession2 = daoMaster2.newSession();
         shuLiveChinaDao2 = daoSession2.getShuLiveChinaDao();
 
-        DaoMaster.DevOpenHelper devOpenHelper3 = new DaoMaster.DevOpenHelper(context,"livechina5.db");
+        DaoMaster.DevOpenHelper devOpenHelper3 = new DaoMaster.DevOpenHelper(context, "livechina5.db");
         DaoMaster daoMaster3 = new DaoMaster(devOpenHelper3.getReadableDb());
         DaoSession daoSession3 = daoMaster3.newSession();
         shuLiveChinaDao3 = daoSession3.getShuLiveChinaDao();
@@ -202,8 +206,8 @@ public class LiveChina extends BaseFragment {
     }
 
     public void setBackgroundAlpha() {
-        WindowManager.LayoutParams lp=getActivity().getWindow().getAttributes();
-        lp.alpha=1.0f;
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = 1.0f;
         getActivity().getWindow().setAttributes(lp);
     }
 

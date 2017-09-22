@@ -1,6 +1,7 @@
 package cn.co.com.newpanda.view.fragment;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,7 @@ public class ZiLiveChinaFragment extends BaseFragment {
     private LIveChinaRecyclerAdapter lIveChinaRecyclerAdapter;
     private String url;
     private List<String> listshi = new ArrayList<>();
+    private ProgressDialog progressDialog;
 
     public ZiLiveChinaFragment(String url) {
        this.url = url;
@@ -57,6 +59,8 @@ public class ZiLiveChinaFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.show();
         listliveBeen = new ArrayList<>();
         OkHttpUtils.getInstance().get(url, null,  new MyNetWorkCallback<ZiLiveChinaBean>() {
 
@@ -67,23 +71,19 @@ public class ZiLiveChinaFragment extends BaseFragment {
 //                for (int i = 0; i < listliveBeen.size(); i++){
 //                    String id = listliveBeen.get(i).getId();
 //                    String urls = "http://vdn.live.cntv.cn/api2/live.do?channel=pa://cctv_p2p_hd"+id+"&amp;client=androidapp";
-//                    OkHttpUtils.getInstance().get(urls, null, new MyNetWorkCallback<LiveChinaShiPin.HlsUrlBean>() {
+//                    OkHttpUtils.getInstance().get(urls, null, new MyNetWorkCallback<LiveChinaShiPin>() {
 //                        @Override
-//                        public void onSuccess(LiveChinaShiPin.HlsUrlBean hlsUrlBean) {
-//                            String hls1 = hlsUrlBean.getHls1();
-//                            listshi.add(hls1);
-//                            lIveChinaRecyclerAdapter.notifyDataSetChanged();
+//                        public void onSuccess(LiveChinaShiPin liveChinaShiPin) {
+//                            String hds1 = liveChinaShiPin.getHds_url().getHds1();
+//                            listshi.add(hds1);
 //                        }
+//
 //                        @Override
 //                        public void onError(int errorCode, String errorMsg) {
 //
 //                        }
 //                    });
 //                }
-
-
-
-
                 recyclerViewLive.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
                 //关闭上拉加载
                 recyclerViewLive.setLoadingMoreEnabled(false);
@@ -118,7 +118,7 @@ public class ZiLiveChinaFragment extends BaseFragment {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerViewLive.setLayoutManager(linearLayoutManager);
                 recyclerViewLive.setAdapter(lIveChinaRecyclerAdapter);
-
+                progressDialog.dismiss();
             }
 
             @Override
