@@ -32,6 +32,4 @@
         android:layout_height="match_parent"
         android:id="@+id/pager_china"
         ></cn.co.com.newpanda.view.pager.NoScrollViewPager>
-
-
 </LinearLayout>
