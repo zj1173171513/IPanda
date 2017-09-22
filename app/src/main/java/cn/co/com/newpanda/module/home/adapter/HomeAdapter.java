@@ -214,9 +214,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.fourItemRecy.setLayoutManager(manager);
         HomeSixAdapter homeFourAdapter = new HomeSixAdapter(mContext, list);
         holder.fourItemRecy.setAdapter(homeFourAdapter);
-
     }
-    //长城直播
+
     private void setFloorFive(FiveViewHolder holder) {
         HomeBean.DataBean.WallliveBean pandalive = mList.get(0).getWalllive();
         holder.fourItemTitle.setText(pandalive.getTitle());

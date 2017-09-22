@@ -11,20 +11,20 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
     <uses-permission android:name="android.permission.process_outgoing_calls" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -35,13 +35,11 @@
     <application
         android:name=".app.App"
         android:allowBackup="true"
-        android:icon="@mipmap/logo_ipnda"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,17 +49,11 @@
         <activity
             android:name=".view.activity.TwoActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:screenOrientation="portrait" />
         <activity android:name=".view.activity.BillowingVideoActicity.ShiPinActivity" />
-        <!-- PandaLive视频Activity -->
         <activity
             android:name=".view.activity.pandaliveActivity.VideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape" />
-        />
-
+            android:screenOrientation="portrait" />
         <activity android:name=".module.home.homeactivity.VideoActivity" />
         <activity android:name=".module.home.homeactivity.InteractionActivity" />
         <activity android:name=".module.home.homeactivity.WebViewActivity" />
@@ -110,20 +102,13 @@
             android:name="UMENG_APPKEY"
             android:value="561cae6ae0f55abd990035bf" />
 
-
         <activity android:name=".view.activity.BoBao.BoBaoActivity" />
         <activity
             android:name=".view.activity.BoBao.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".view.activity.BillowingVideoActicity.toushipinActivity" />
         <activity android:name=".view.activity.landfallActivity" />
-        <activity android:name=".view.activity.settingActivity" />
-        <activity android:name=".view.activity.ShouCangActivity" />
-        <activity android:name=".module.home.homeactivity.CctvActivity" />
-        <activity
-            android:name=".module.home.homeactivity.HomeLiveActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"></activity>
+        <activity android:name=".view.activity.settingActivity"></activity>
     </application>
 
 </manifest>

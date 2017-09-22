@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,7 +33,7 @@ public class WonderfulFragment extends Fragment implements IGetView<CcAcBean>{
     Unbinder unbinder;
     private String won;
     private MPresenter mPresenter;
-    private List<CcAcBean.VideoBean> video = new ArrayList<>();
+    private List<CcAcBean.VideoBean> video;
     private PdListAdapter pdListAdapter;
 
     public WonderfulFragment(String won) {
