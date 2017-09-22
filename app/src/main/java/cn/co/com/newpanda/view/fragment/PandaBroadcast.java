@@ -66,6 +66,7 @@ public class PandaBroadcast extends BaseFragment implements PullToRefreshBase.On
     protected void init(View view) {
         ButterKnife.bind(getActivity());
 
+
         top = View.inflate(getActivity(), R.layout.item_top_broad, null);
         image1 = top.findViewById(R.id.image);
 
