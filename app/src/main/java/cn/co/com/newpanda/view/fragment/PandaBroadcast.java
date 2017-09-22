@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -33,7 +32,7 @@ import cn.co.com.newpanda.module.pandabroadcast.PandaBroadcastContract;
 import cn.co.com.newpanda.module.pandabroadcast.PandaBroadcastPresenter;
 import cn.co.com.newpanda.net.callback.MyNetWorkCallback;
 import cn.co.com.newpanda.view.activity.BoBao.BoBaoActivity;
-import cn.co.com.newpanda.view.activity.BoBao.WebViewActivity;
+import cn.co.com.newpanda.view.activity.BoBao.PDBCActivity;
 
 
 /**
@@ -105,7 +104,7 @@ public class PandaBroadcast extends BaseFragment implements PullToRefreshBase.On
 
     @Override
     public void dismissDialog() {
-        dialog.dismiss();
+//        dialog.dismiss();
     }
 
     @Override
@@ -116,10 +115,11 @@ public class PandaBroadcast extends BaseFragment implements PullToRefreshBase.On
         image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), BoBaoActivity.class);
+                Intent intent = new Intent(App.context, BoBaoActivity.class);
+                intent.putExtra("url1", pdbcBean.getData().getBigImg().get(0).getUrl());
                 intent.putExtra("title", pdbcBean.getData().getBigImg().get(0).getTitle());
-                intent.putExtra("pid", pdbcBean.getData().getBigImg().get(0).getPid());
-                Log.e("TAG", pdbcBean.getData().getBigImg().get(0).getPid());
+                intent.putExtra("id1", pdbcBean.getData().getBigImg().get(0).getId());
+                intent.putExtra("imageurl", pdbcBean.getData().getBigImg().get(0).getImage());
                 startActivity(intent);
             }
         });
@@ -149,16 +149,17 @@ public class PandaBroadcast extends BaseFragment implements PullToRefreshBase.On
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+    unbinder.unbind();
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Intent intent = new Intent(getActivity(), WebViewActivity.class);
-        intent.putExtra("name", list.get(i));
-        getActivity().startActivity(intent);
+        Intent intent = new Intent(App.context, PDBCActivity.class);
+        PandaBroadcastInfoBean.ListBean listBean = list.get(i - 1);
+        intent.putExtra("list", listBean);
+        startActivity(intent);
 
     }
 
@@ -206,7 +207,7 @@ public class PandaBroadcast extends BaseFragment implements PullToRefreshBase.On
 
     @Override
     public void onLastItemVisible() {
-        Toast.makeText(getActivity(), "向下向下看我看我", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "人家是有底线的", Toast.LENGTH_SHORT).show();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

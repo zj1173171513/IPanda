@@ -102,17 +102,14 @@
             android:name="UMENG_APPKEY"
             android:value="561cae6ae0f55abd990035bf" />
 
-        <activity android:name=".view.activity.BoBao.BoBaoActivity" />
-        <activity
-            android:name=".view.activity.BoBao.WebViewActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".view.activity.BillowingVideoActicity.toushipinActivity" />
         <activity android:name=".view.activity.landfallActivity" />
-        <activity android:name=".view.activity.settingActivity"></activity>
-        <activity android:name=".view.activity.BoBao.BoBaoActivity"
+        <activity android:name=".view.activity.settingActivity" />
+        <activity
+            android:name=".view.activity.BoBao.BoBaoActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activity.BoBao.WebViewActivity" />
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.activity.BoBao.PDBCActivity"></activity>
     </application>
 
 </manifest>

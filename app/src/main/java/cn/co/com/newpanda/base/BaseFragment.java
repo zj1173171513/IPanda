@@ -12,6 +12,7 @@ import butterknife.Unbinder;
 
 
 public abstract class BaseFragment extends Fragment {
+//两个方法主要用
 
     protected Unbinder unbinder;
     @Nullable

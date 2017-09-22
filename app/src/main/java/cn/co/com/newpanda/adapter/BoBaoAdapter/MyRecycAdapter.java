@@ -47,6 +47,7 @@ public class MyRecycAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        //赋值ViewHolder
         ViewHolder holder = null;
         if (view == null) {
             view = View.inflate(context, R.layout.item_pdbcinfo, null);

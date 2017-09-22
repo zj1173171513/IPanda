@@ -9,7 +9,9 @@ import cn.co.com.newpanda.app.App;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
-
+//是一个抽象类
+    //写抽象方法，
+   // 其他类都调用这个类的方法
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
