@@ -150,7 +150,7 @@ public class PandaBroadcast extends BaseFragment implements PullToRefreshBase.On
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    unbinder.unbind();
+        unbinder.unbind();
     }
 
 
