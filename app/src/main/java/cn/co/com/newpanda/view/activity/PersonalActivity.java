@@ -52,7 +52,5 @@ public class PersonalActivity extends AppCompatActivity {
                 startActivity(new Intent(PersonalActivity.this, ShouCangActivity.class));
             }
         });
-
-
     }
 }
